@@ -1,0 +1,9 @@
+com/example/ch/model/UsersExample.class
+com/example/ch/DatabaseConnectionTest.class
+com/example/ch/model/UsersExample$Criteria.class
+com/example/ch/mapper/UsersMapper.class
+com/example/ch/controller/LoginController.class
+com/example/ch/model/UsersExample$GeneratedCriteria.class
+com/example/ch/model/Users.class
+com/example/ch/model/UsersExample$Criterion.class
+com/example/ch/Application.class
