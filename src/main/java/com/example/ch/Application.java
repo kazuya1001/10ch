@@ -1,4 +1,4 @@
-package src.main.java.com.example.ch;
+package com.example.ch;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
