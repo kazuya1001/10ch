@@ -19,6 +19,7 @@ public class SignUpService implements ISignUpService {
 	public SignUpResponse addAcount(Users addAcount) {
 		System.out.println("SignUpResponse.addAcount()呼び出し");
 		Date CreatTime = new Date();
+		addAcount.setId(1);
 		addAcount.setCreatedAt(CreatTime);
 			if(iUsersRepository.addAcount(addAcount)) {
 				signUpResponse = addResponse(0,0,null);
