@@ -33,7 +33,7 @@ public class SignUpController {
 		System.out.println("SignUpController.signUp()呼び出し");
 		Users addAcount = new Users();
 		addAcount.setUserId(userId);
-		addAcount.setUserName(userId);
+		addAcount.setUserName(userName);
 		addAcount.setPasswordHash(pass);
 		addAcount.setEmail(email);
 		//カウント追加処理

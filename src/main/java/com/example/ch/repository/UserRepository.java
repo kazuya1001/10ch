@@ -18,6 +18,7 @@ public class UserRepository implements IUsersRepository {
 		try {
 			usersMapper.insert(addAcount);
 		}catch(Exception e) {
+			e.printStackTrace(); 
 			return false;
 		}
 		return true;

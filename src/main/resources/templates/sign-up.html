@@ -1,60 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>サインアップ画面</title>
- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" th:src="@{/js/sign-up.js}"></script>
+	<meta charset="UTF-8">
+	<title>サインアップ画面</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/sign-up.js}"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/sign-up.css}">
 </head>
 <body>
 	<!--header-->
 	<header>
 		<button type="button">Home</button>
-		<button type="button">Login</button>
+		<button type="button" onclick="location.href='/login'">Login</button>
 	</header>
-	<table>
-		<span>サインアップ</span>
-		<tr>
-			<td>
-				<label>ユーザ名</label>
-			</td>
-			<td>
-				<input type="text" id="user-name">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<label>ユーザID</label>
-			</td>
-			<td>
-				<input type="text" id="user-id">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<label>パスワード</label>
-			</td>
-			<td>
-				<input type="password" id="password">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<label>確認用パスワード</label>
-			</td>
-			<td>
-				<input type="password" id="con-password">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<label>メールアドレス</label>
-			</td>
-			<td>
-				<input type="email" id="email">
-			</td>
-		</tr>
-	</table>
-	<button type="button" onclick="clickSignUpButton()">サインアップ</button>
+	<form id="sign-up-form">
+		<table>
+			<lavel>サインアップ</lavel>
+				<td>
+					<label>ユーザID</label>
+				</td>
+				<td>
+					<input type="text" id="user-id">
+					<div id="user-id-hint" class="hint">ユーザIDは半角英数字の3〜15文字で入力してください</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>ユーザ名</label>
+				</td>
+				<td>
+					<input type="text" id="user-name">
+					<div id="user-name-hint" class="hint">ユーザ名は1〜10文字で入力してください</div>
+				</td>
+			</tr>
+			<tr>
+			<tr>
+				<td>
+					<label>パスワード</label>
+				</td>
+				<td>
+					<input type="password" id="password">
+					<div id="password-hint" class="hint">パスワードは半角英数字の組み合わせで8文字以上で入力してください</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>確認用パスワード</label>
+				</td>
+				<td>
+					<input type="password" id="con-password">
+					<div id="con-password-hint" class="hint">パスワードが一致しません</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>メールアドレス</label>
+				</td>
+				<td>
+					<input type="email" id="email">
+					<div id="email-hint" class="hint">有効なメールアドレスを入力してください</div>
+				</td>
+			</tr>
+		</table>
+		<button type="button"  id="sign-up-button" class="disabled" disabled>サインアップ</button>
+	</form>
 </body>
 </html>
