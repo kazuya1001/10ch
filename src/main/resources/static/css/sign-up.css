@@ -39,3 +39,18 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focu
     border: 1px solid #666; /* フォーカス時の枠線スタイル */
     outline: none; /* デフォルトのアウトラインを削除 */
 }
+
+
+.password-container {
+	position: relative;
+}
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+input[type="password"] {
+    width: calc(100% - 30px); /* Adjust width to fit icon */
+}

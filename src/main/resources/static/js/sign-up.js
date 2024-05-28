@@ -83,6 +83,21 @@ $(document).ready(function(){
         }
 		checkFormValidity();
 	});
+	
+    // パスワード表示/非表示切り替え
+    $('#toggle-password').on('click', function() {
+        const passwordField = $('#password');
+        const type = passwordField.attr('type') === 'password' ? 'text' : 'password';
+        passwordField.attr('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+
+    $('#toggle-con-password').on('click', function() {
+        const passwordField = $('#con-password');
+        const type = passwordField.attr('type') === 'password' ? 'text' : 'password';
+        passwordField.attr('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
 	// サインアップボタン
 	$('#sign-up-button').on('click',function() {
 		if($(this).prop('disabled')){
@@ -102,7 +117,17 @@ $(document).ready(function(){
 			dataType: 'json',
 			data: data,
 		    success: function(response) {
-            	console.log('Success:', response);
+                if (response.processResult === 2) {
+                    // エラーメッセージを表示
+                    $('#error-message').text(response.errMessage).show();
+                    return;
+                }
+            $('body').children().hide(); 
+            $('body').append('<div id="success-message" style="color: green; text-align: center; margin-top: 20px;">登録が完了しました。5秒後にサインイン画面に遷移します。</div>');
+            
+            setTimeout(function() {
+            	window.location.href = '/sign-in'; // サインイン画面のURLに遷移
+            }, 5000);
         	},
             error: function(error) {
                 console.error('Error:', error);

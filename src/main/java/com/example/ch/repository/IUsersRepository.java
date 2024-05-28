@@ -4,5 +4,9 @@ import com.example.ch.model.Users;
 
 public interface IUsersRepository {
 
-	boolean addAcount (Users addAcount);
+	void addAcount (Users addAcount);
+	
+	int countUserIdRegistered(String userId);
+	
+	int countEmailRegistered(String email);
 }
