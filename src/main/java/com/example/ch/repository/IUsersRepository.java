@@ -9,4 +9,8 @@ public interface IUsersRepository {
 	int countUserIdRegistered(String userId);
 	
 	int countEmailRegistered(String email);
+	
+	Users findByUserId(String userId); 
+	
+	Users findByEmail(String email);
 }

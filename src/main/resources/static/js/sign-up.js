@@ -117,7 +117,12 @@ $(document).ready(function(){
 			dataType: 'json',
 			data: data,
 		    success: function(response) {
-                if (response.processResult === 2) {
+                if (response.processResult === 1){
+					// エラーメッセージを表示
+					const errMsg = response.errMessage.replace("{0}",messageSignUp.signUp);
+					$('#error-message').text(errMsg + messageList.info.I0001);
+					return;
+				}else if (response.processResult === 2) {
                     // エラーメッセージを表示
                     $('#error-message').text(response.errMessage).show();
                     return;
@@ -131,6 +136,7 @@ $(document).ready(function(){
         	},
             error: function(error) {
                 console.error('Error:', error);
+                $('#error-message').text('サーバーエラーが発生しました。').show();
             }
         });
 	});	

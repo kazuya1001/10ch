@@ -22,24 +22,31 @@ public class SignUpService implements ISignUpService {
 	@Override
 	public SignUpResponse addAcount(Users addAcount) {
 		System.out.println("SignUpResponse.addAcount()呼び出し");
-		Date CreatTime = new Date();
-		addAcount.setCreatedAt(CreatTime);
 		try {
-			if(registeredCheck(addAcount.getUserId(),addAcount.getEmail())) {
+			String userId = addAcount.getUserId();
+			String email = addAcount.getEmail();
+			// 登録済みチェック
+			if(registeredCheck(userId,email)) {
+				System.out.println("登録済みチェックOK");
+				Date CreatTime = new Date();
+				addAcount.setCreatedAt(CreatTime);
 				iUsersRepository.addAcount(addAcount);
 				signUpResponse = addResponse(chUtil.SUCCESS,0,null);
 			}else {
+				System.out.println("登録済みチェックNG");
 				signUpResponse = addResponse(chUtil.FAILURE_2,0,chUtil.ERROR_REGISTERED);
 			}
 		}catch(Exception e){
 			System.out.println(e);
-			signUpResponse = addResponse(chUtil.FAILURE_1,0,chUtil.ERROR);
+			signUpResponse = addResponse(chUtil.FAILURE_1,0,chUtil.ERROR_DB);
 		}
 		return  signUpResponse;
 	}
 	
 	// 登録済みチェック
+	@Override
 	public boolean registeredCheck(String userId,String email){
+		System.out.println("SignUpResponse.registeredCheck()呼び出し");
 		boolean result = false;
 		int countUserId = iUsersRepository.countUserIdRegistered(userId);
 		int countEmail = iUsersRepository.countEmailRegistered(email);
@@ -48,7 +55,9 @@ public class SignUpService implements ISignUpService {
 		}
 		return result;
 	}
+	
 	// 処理結果追加
+	@Override
 	public SignUpResponse addResponse(int processResult,int httpStatusCd,String errMessage) {
 		System.out.println("SignUpResponse.addResponse()呼び出し");
 		signUpResponse.setProcessResult(processResult);
@@ -56,5 +65,4 @@ public class SignUpService implements ISignUpService {
 		signUpResponse.setErrMessage(errMessage);
 		return signUpResponse;
 	}
-		
 }

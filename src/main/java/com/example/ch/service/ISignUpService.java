@@ -8,4 +8,6 @@ public interface ISignUpService {
 	SignUpResponse addAcount(Users addcAcount);
 	
 	boolean registeredCheck(String userId,String email);
+	
+	SignUpResponse addResponse(int processResult,int httpStatusCd,String errMessage);
 }
