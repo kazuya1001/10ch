@@ -29,7 +29,7 @@ public class SignUpService implements ISignUpService {
 			if(registeredCheck(userId,email)) {
 				System.out.println("登録済みチェックOK");
 				Date CreatTime = new Date();
-				addAcount.setCreatedAt(CreatTime);
+				addAcount.setUpdateAt(CreatTime);
 				iUsersRepository.addAcount(addAcount);
 				signUpResponse = addResponse(chUtil.SUCCESS,0,null);
 			}else {
@@ -57,8 +57,7 @@ public class SignUpService implements ISignUpService {
 	}
 	
 	// 処理結果追加
-	@Override
-	public SignUpResponse addResponse(int processResult,int httpStatusCd,String errMessage) {
+	private SignUpResponse addResponse(int processResult,int httpStatusCd,String errMessage) {
 		System.out.println("SignUpResponse.addResponse()呼び出し");
 		signUpResponse.setProcessResult(processResult);
 		signUpResponse.setHttpStatusCd(httpStatusCd);

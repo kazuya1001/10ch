@@ -24,7 +24,7 @@ public class UserRepository implements IUsersRepository {
 		UsersExample example = new UsersExample();
 		UsersExample.Criteria criteria = example.createCriteria();
 		criteria.andUserIdEqualTo(userId);
-		return usersMapper.selectByExample(example);
+		return (Users) usersMapper.selectByExample(example);
 	}
 	
 	// emailをキーにアカウント検索(サインイン画面)
@@ -32,7 +32,7 @@ public class UserRepository implements IUsersRepository {
 		UsersExample example = new UsersExample();
 		UsersExample.Criteria criteria = example.createCriteria();
 		criteria.andEmailEqualTo(email);
-		return usersMapper.selectByExample(example);
+		return (Users) usersMapper.selectByExample(example);
 	}	
 	
 	// ユーザID件数取得(サインアップ画面:登録済みチェック、サインイン画面:存在チェック)

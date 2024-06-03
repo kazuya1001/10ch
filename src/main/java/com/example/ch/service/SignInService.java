@@ -67,7 +67,7 @@ public class SignInService implements ISignInService {
 	}
 	
 	// 処理結果追加
-	public SignInResponse addResponse(int processResult,int httpStatusCd,String errMessage,Users signInedUser) {
+	private SignInResponse addResponse(int processResult,int httpStatusCd,String errMessage,Users signInedUser) {
 		System.out.println("SignUpResponse.addResponse()呼び出し");
 		signInResponse.setProcessResult(processResult);
 		signInResponse.setHttpStatusCd(httpStatusCd);

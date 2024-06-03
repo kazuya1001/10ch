@@ -9,5 +9,4 @@ public interface ISignInService {
 	
 	boolean existingCheck(String userId,String email);
 	
-	SignInResponse addResponse(int processResult,int httpStatusCd,String errMessage,Users signInUser);
 }

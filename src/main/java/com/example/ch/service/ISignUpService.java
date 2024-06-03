@@ -9,5 +9,4 @@ public interface ISignUpService {
 	
 	boolean registeredCheck(String userId,String email);
 	
-	SignUpResponse addResponse(int processResult,int httpStatusCd,String errMessage);
 }

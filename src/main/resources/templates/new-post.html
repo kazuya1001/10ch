@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>新規投稿画面</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/new-post.js}"></script>
+	<script type="text/javascript" th:src="@{/js/common/messages.js}"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/new-post.css}">
+</head>
+
+<body>
+	<!--header-->
+	<header>
+		<button type="button" onclick="location.href='/home'">Home</button>
+		<button type="button" onclick="location.href='/home'">サインアウト</button>
+	</header>
+	<form id="new-post-form">
+		<table>
+			<lavel>新規投稿</lavel>
+			<tr>
+				<td>
+					<labe>タイトル</label>
+				</td>
+				<td>
+					<input type="text" id="title"　maxlength="30" placeholder="30文字以内で入力してください">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<labe>内容</label>
+				</td>
+				<td>
+					<textarea id="content"　maxlength="1000" placeholder="1000文字以内で入力してください"></textarea>
+				</td>
+			</tr>		
+		</table>
+		<div id="error-message" class="hint" style="color:red;"></div>
+		<button type="button" id="new-post-button">投稿</button>
+	</form>
+</body>
+
+</html>

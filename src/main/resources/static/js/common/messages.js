@@ -25,3 +25,7 @@ const messageSignIn = {
 	signIn:"サインイン",
 };
 
+// 新規投稿画面で使用
+const messageNewPost = {
+	newPost:"新規投稿",
+};
