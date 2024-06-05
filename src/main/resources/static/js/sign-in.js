@@ -22,7 +22,7 @@ $(document).ready(function() {
 
         // エラーメッセージの表示と処理の中断
         if (errorMessage) {
-            $('#error-message').html(errorMessage);
+            $('#error-message').html(errorMessage).show();
             return; // ここで処理を中断
         }
 

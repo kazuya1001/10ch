@@ -1,11 +1,12 @@
 package com.example.ch.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.example.ch.mapper.PostsMapper;
 import com.example.ch.model.Posts;
 import com.example.ch.model.PostsExample;
-
+@Repository
 public class NewPostRepository implements INewPostRepository {
 	
 	@Autowired

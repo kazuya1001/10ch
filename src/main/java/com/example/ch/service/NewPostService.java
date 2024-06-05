@@ -4,12 +4,13 @@ import java.util.Date;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.ch.common.ChUtil;
 import com.example.ch.model.Posts;
 import com.example.ch.repository.INewPostRepository;
 import com.example.ch.response.NewPostResponse;
-
+@Service
 public class NewPostService implements INewPostService {
 
 	@Autowired

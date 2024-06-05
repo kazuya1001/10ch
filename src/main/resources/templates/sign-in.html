@@ -14,24 +14,27 @@
 <body>
 	<!--header-->
 	<header>
-		<button type="button" onclick="location.href='/home'">Home</button>
+		<button type="button" class="homeButton" onclick="location.href='/home'">Home</button>
 	</header>
+	<div class="logoContainer">
+        <img src="/img/logo10ch.webp" class="logo">
+    </div>
 	<form id="sign-in-form">
 		<table>
 			<tr>
 				<td>
-					<input type="text" id="user-id" placeholder="ユーザ名またはemail">
+					<input type="text" id="user-id" class="inputUserId" placeholder="ユーザIDまたはemail">
 				</td>
 			</tr>
 			<tr>
 				<td class="password-container">
-					<input type="password" id="password" placeholder="パスワード">
+					<input type="password" id="password" class="inputPass" placeholder="パスワード">
 					<i class="fas fa-eye password-toggle" id="toggle-password"></i>
 				</td>
 			</tr>
 		</table>
 		<div id="error-message" class="hint" style="color:red;"></div>
-		<button type="button" id="sign-in-button">サインイン</button>
+		<button type="button" id="sign-in-button" class="signInButton">Sign In</button>
 	</form>
 	<p>アカウントを登録していない方は<a href="/sign-up">こちら</a>をクリックし登録を済ませてください。</p>
 </body>

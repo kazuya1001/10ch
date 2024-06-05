@@ -43,7 +43,7 @@ public class NewPostController {
 		return newPostResponse;
 	}
 	
-	// ユーザ情報取り出し
+	// セッション情報からユーザ情報取り出し
 	@GetMapping("api/getUserInfo")
 	@ResponseBody
 	public Users getUserInfo(HttpSession session) {

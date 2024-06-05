@@ -31,8 +31,10 @@ public class SignInService implements ISignInService {
 				System.out.println("存在チェックOK");
 				// 入力された情報を元にユーザ情報を取得
 				if(!(userId.isEmpty())) {
+					System.out.println("ユーザIDで登録確認");
 					signInedUser = iUsersRepository.findByUserId(userId);
 				}else if(!(email.isEmpty())) {
+					System.out.println("emailで登録確認");
 					signInedUser = iUsersRepository.findByEmail(email);
 				}
 				// パスワードチェック
