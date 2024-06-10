@@ -14,14 +14,17 @@
 <body>
 	<!--header-->
 	<header>
-		<button type="button" onclick="location.href='/home'">Home</button>
-		<button type="button" onclick="location.href='/sign-in'">サインイン</button>
+		<button type="button" class="homeButton" onclick="location.href='/home'">Home</button>
+		<button type="button" class="signInButton" onclick="location.href='/sign-in'">Sign In</button>
 	</header>
+	<div class="logoContainer">
+        <img src="/img/logo10ch.webp" class="logo">
+         <h1 class="signUpText">Sign-Up</h1>
+    </div>
 	<form id="sign-up-form">
 		<table>
-			<lavel>サインアップ</lavel>
 			<tr>
-				<td>
+				<td class="labelContainer">
 					<label>ユーザID</label>
 				</td>
 				<td>
@@ -30,7 +33,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td class="labelContainer">
 					<label>ユーザ名</label>
 				</td>
 				<td>
@@ -40,7 +43,7 @@
 			</tr>
 			<tr>
 			<tr>
-				<td>
+				<td class="labelContainer">
 					<label>パスワード</label>
 				</td>
 				<td class="password-container">
@@ -50,7 +53,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td class="labelContainer">
 					<label>確認用パスワード</label>
 				</td>
 				<td class="password-container">
@@ -60,7 +63,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td class="labelContainer">
 					<label>メールアドレス</label>
 				</td>
 				<td>
@@ -70,7 +73,7 @@
 			</tr>
 		</table>
 		<div id="error-message" class="hint" style="color:red;"></div>
-		<button type="button" id="sign-up-button" class="disabled" disabled>サインアップ</button>
+		<button type="button" id="sign-up-button" class="signUpButton" disabled>Sign Up</button>
 	</form>
 </body>
 

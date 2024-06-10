@@ -1,43 +1,46 @@
 @charset "UTF-8";
 
-/* エラーのスタイル */
 .error {
     border: 1px solid red; /* 既存のエラー枠線スタイル */
 }
 
-/* 入力フィールドの成功のスタイル */
 .success {
     border: 1px solid green; /* 既存の成功枠線スタイル */
 }
 
-/* ヒントのデフォルトスタイル */
 .hint {
     color: red; /* 既存のヒントスタイル */
 }
 
-/* ヒントの有効スタイル */
 .valid {
     color: blue; /* 既存の有効スタイル */
 }
 
-/* 無効なボタンスタイル */
-.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* テキストボックスの基本スタイル */
 input[type="text"], input[type="password"], input[type="email"] {
     border: 1px solid #ccc; /* デフォルトの枠線スタイル */
     padding: 5px; /* パディング */
     width: 100%; /* 幅を100%に設定 */
     box-sizing: border-box; /* パディングを含む */
+    z-index: 10; /* ここを追加してテキストボックスを前面に表示 */
+    position: relative; /* z-indexを適用するために必要 */
 }
 
-/* フォーカス時の枠線スタイル */
 input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
     border: 1px solid #666; /* フォーカス時の枠線スタイル */
     outline: none; /* デフォルトのアウトラインを削除 */
+}
+
+.inputUserId, .inputPass {
+    width: calc(100% - 30px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 50px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: white; 
+    z-index: 10; /* ここを追加してテキストボックスを前面に表示 */
+    position: relative;
 }
 
 
@@ -46,11 +49,128 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focu
 }
 .password-toggle {
     position: absolute;
-    right: 10px;
-    top: 50%;
+    right: 20px;
+    top: 35%;
     transform: translateY(-50%);
     cursor: pointer;
+    font-size: 1.5em;
 }
 input[type="password"] {
-    width: calc(100% - 30px); /* Adjust width to fit icon */
+    width: calc(100% - 30px); 
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.logoContainer {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    top:10px;
+    height: -150px;
+}
+
+.logo {
+    height: 300px;
+    width: 300px;
+    border-radius:50% ;
+    object-fit: cover;
+    margin: 0;
+    padding: 0;
+    clip-path: circle(40%);
+}
+
+.signUpText {
+    margin-top: 10px;
+    font-size: 50px;
+    color: #007bff;
+    transform: translate(0%,-100%);
+}
+input[type="text"], input[type="password"], input[type="email"] {
+    border: 1px solid #ccc; /* デフォルトの枠線スタイル */
+    padding: 10px; /* パディングを増加 */
+    width: 100%; /* 幅を100%に設定 */
+    box-sizing: border-box; /* パディングを含む */
+    font-size: 16px; /* フォントサイズを増加 */
+    border-radius: 50px; /* 角を丸くする */
+    background-color: white; /* 背景色 */
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+    border: 1px solid #666; /* フォーカス時の枠線スタイル */
+    outline: none; /* デフォルトのアウトラインを削除 */
+}
+
+.signInButton {
+    width: 8em; /* 幅を小さくする */
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px; /* ボタン間の間隔を調整 */
+}
+
+.homeButton {
+	width: 8em; /* 幅を小さくする */
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px; /* ボタン間の間隔を調整 */
+}
+
+form {
+    background-color: transparent;
+    padding: 40px;
+    box-shadow: none;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 700px;
+    margin-top: -140px; /* フォームの位置を調整 */
+}
+.labelContainer {
+    display: flex;
+    align-items: center;
+}
+
+.signUpButton{
+	    display: block;
+    margin: 20px auto 0;
+    width: 8em;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    cursor: pointer;
+    text-align: center;
 }
