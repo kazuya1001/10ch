@@ -18,7 +18,8 @@ public class ChUtil {
 	public final String ERROR_PASS_WRONG = "入力されたパスワードは間違っています。";
 	
 	/* NewPostServiceで使用 */
-	public final int MAX_ATTEMPTS = 10;
+	public final String NO_REMAINDER = "余りがありません";
+	public final String CAN_NOT_POST = "これ以上投稿できません";
 	
 	
 }
