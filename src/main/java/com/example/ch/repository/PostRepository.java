@@ -26,8 +26,7 @@ public class PostRepository implements IPostRepository {
 	
 	// 投稿一覧取得(ホーム画面)
 	public List<Posts> getHomePost(){
-		List<Posts> postRecord = postsMapper.selectRecentPosts();
-		return postRecord;
+		return postsMapper.selectRecentPosts();
 	}
 	
 }

@@ -19,6 +19,7 @@ public class HomeService implements IHomeService {
 	@Autowired
 	ChUtil chUtil;
 	
+	// ホーム画面表示用最新5投稿取得
 	@Override
 	public HomeResponse getHomePost() {
 		

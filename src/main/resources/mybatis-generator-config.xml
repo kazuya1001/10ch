@@ -14,3 +14,9 @@
         <table schema="public" tableName="posts"/>
     </context>
 </generatorConfiguration>
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <!-- 他の設定 (環境設定、マッピングファイルのパスなど) -->
+</configuration>

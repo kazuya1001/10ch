@@ -286,7 +286,7 @@
   <select id="selectAllPostIds" resultType="string">
 	SELECT post_id FROM posts
   </select>
-  <select id="selectRecentPosts" resultType="com.example.ch.model.Posts">
+  <select id="selectRecentPosts" resultType="com.example.ch.model.Posts" resultMap="BaseResultMap">
 	SELECT * FROM posts ORDER BY update_at DESC LIMIT 5
   </select>
 
