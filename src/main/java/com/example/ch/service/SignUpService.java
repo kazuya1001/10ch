@@ -1,6 +1,8 @@
 package com.example.ch.service;
 
+import java.security.MessageDigest;
 import java.util.Date;
+import java.util.HexFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,21 +24,29 @@ public class SignUpService implements ISignUpService {
 	@Override
 	public SignUpResponse addAcount(Users addAcount) {
 		System.out.println("SignUpResponse.addAcount()呼び出し");
+		String userId = addAcount.getUserId();
+		String email = addAcount.getEmail();
+		String pass = addAcount.getPasswordHash();
 		try {
-			String userId = addAcount.getUserId();
-			String email = addAcount.getEmail();
 			// 登録済みチェック
-			if(registeredCheck(userId,email)) {
+			if (registeredCheck(userId,email)) {
 				System.out.println("登録済みチェックOK");
 				Date CreatTime = new Date();
 				addAcount.setUpdateAt(CreatTime);
+				// パスワードハッシュ化
+				MessageDigest sha256 = MessageDigest.getInstance("sha-256");
+				byte[] sha256Byte = sha256.digest(pass.getBytes());
+				HexFormat hex = HexFormat.of().withLowerCase();
+				String hashPass = hex.formatHex(sha256Byte);
+				addAcount.setPasswordHash(hashPass);
+				// アカウント追加処理
 				iUsersRepository.addAcount(addAcount);
 				signUpResponse = addResponse(chUtil.SUCCESS,0,null);
-			}else {
+			} else {
 				System.out.println("登録済みチェックNG");
 				signUpResponse = addResponse(chUtil.FAILURE_2,0,chUtil.ERROR_REGISTERED);
 			}
-		}catch(Exception e){
+		} catch(Exception e){
 			System.out.println(e);
 			signUpResponse = addResponse(chUtil.FAILURE_1,0,chUtil.ERROR_DB);
 		}
@@ -45,7 +55,7 @@ public class SignUpService implements ISignUpService {
 	
 	// 登録済みチェック
 	@Override
-	public boolean registeredCheck(String userId,String email){
+	public boolean registeredCheck(String userId,String email) {
 		System.out.println("SignUpResponse.registeredCheck()呼び出し");
 		boolean result = false;
 		int countUserId = iUsersRepository.countUserIdRegistered(userId);

@@ -56,8 +56,6 @@
    				<version>1.18.24</version> 
     			<scope>provided</scope>
 			</dependency>
-
-
 		</dependencies>
 	
 <build>
@@ -82,13 +80,11 @@
                 <overwrite>true</overwrite>
             </configuration>
             <executions>
-                <execution>
-                    <id>generate-sources</id>
-                    <phase>generate-sources</phase>
-                    <goals>
-                        <goal>generate</goal>
-                    </goals>
-                </execution>
+                <id>generate-sources</id>
+                <phase>generate-sources</phase>
+                <goals>
+                    <goal>generate</goal>
+                </goals>
             </executions>
         </plugin>
     </plugins>

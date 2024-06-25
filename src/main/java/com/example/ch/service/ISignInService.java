@@ -7,6 +7,4 @@ public interface ISignInService {
 	
 	SignInResponse signIn(Users signInAcount);
 	
-	boolean existingCheck(String userId,String email);
-	
 }
