@@ -27,7 +27,6 @@ public class NewPostController {
 		return "new-post";
 	}
 	
-	
 	// 投稿機能
 	@PostMapping("/api/newPost")
 	@ResponseBody
