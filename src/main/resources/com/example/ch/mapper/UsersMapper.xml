@@ -127,6 +127,14 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectUsersNameList" parameterType="list" resultMap="BaseResultMap">
+    SELECT user_id, user_name
+    FROM public.users
+    WHERE user_id IN
+    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+  </select>
   <delete id="deleteByExample" parameterType="com.example.ch.model.UsersExample">
     <!--
       WARNING - @mbg.generated

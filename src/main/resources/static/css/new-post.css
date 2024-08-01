@@ -2,13 +2,18 @@ body {
     font-family: Arial, sans-serif;
     background-color: #e0f0ff; 
     color: #333; 
+    margin: 0;
+    padding: 0;
 }
 
 header {
     background-color: #ffffff; 
-    padding: 10px;
+    padding: 10px 20px;
     text-align: right;
+    align-items: center;
     border-bottom: 1px solid #ccc;
+    height: 3em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 header button {
@@ -21,6 +26,8 @@ header button {
     border-radius: 50px;
     margin-left: 10px;
     min-width: 100px;
+    width: 10em;
+    height: 3em;
 }
 
 header button:hover {

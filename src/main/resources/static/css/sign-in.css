@@ -65,6 +65,20 @@ header {
     margin:auto;
     display: block;
 }
+
+.newAcount{
+	width: 15em;
+    padding: 10px;
+    background-color: #f4f4f9;
+    color: blue;
+    border: 2px solid blue;
+    border-radius: 4px;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 50px;
+    margin:auto;
+    display: block;
+}
 .logoContainer {
     text-align: center;
     margin-bottom: 10px;

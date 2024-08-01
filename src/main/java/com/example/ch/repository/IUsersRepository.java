@@ -1,5 +1,7 @@
 package com.example.ch.repository;
 
+import java.util.List;
+
 import com.example.ch.model.Users;
 
 public interface IUsersRepository {
@@ -13,4 +15,6 @@ public interface IUsersRepository {
 	Users findByUserId(String userId); 
 	
 	Users findByEmail(String email);
+	
+	List<Users> getUserNameList(List<String> userIdList);
 }

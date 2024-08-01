@@ -18,4 +18,6 @@ public class HomeResponse {
 	private String errMessage;
 	// 投稿情報
 	private List<Posts> postRecord;
+	// 投稿者
+	private List<String> userNameRecord;
 }

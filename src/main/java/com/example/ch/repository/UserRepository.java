@@ -1,5 +1,7 @@
 package com.example.ch.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -51,5 +53,11 @@ public class UserRepository implements IUsersRepository {
 		UsersExample.Criteria criteria = example.createCriteria();
 		criteria.andEmailEqualTo(email);
 		return (int) usersMapper.countByExample(example);
+	}
+	
+	// postsテーブルのuserIdをキーにuserName取得
+	@Override
+	public List<Users> getUserNameList(List<String> userIdList) {
+	    return usersMapper.selectUsersNameList(userIdList);
 	}
 }
