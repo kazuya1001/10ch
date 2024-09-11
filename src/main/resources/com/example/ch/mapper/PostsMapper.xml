@@ -287,7 +287,15 @@
 	SELECT post_id FROM posts
   </select>
   <select id="selectRecentPosts" resultType="com.example.ch.model.Posts" resultMap="BaseResultMap">
-	SELECT * FROM posts ORDER BY update_at DESC LIMIT 5
+	SELECT * FROM posts 
+	ORDER BY update_at DESC 
+	LIMIT 5
   </select>
-
+  <select id="selectPostListByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from public.posts
+    where user_id = #{userId,jdbcType=VARCHAR}
+    ORDER BY update_at DESC
+  </select>
 </mapper>

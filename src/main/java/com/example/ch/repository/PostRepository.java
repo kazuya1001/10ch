@@ -29,4 +29,9 @@ public class PostRepository implements IPostRepository {
 		return postsMapper.selectRecentPosts();
 	}
 	
+	// 投稿一覧取得(ユーザ詳細画面)
+	public List<Posts> getPostListByUserId(String userId){
+		return postsMapper.selectPostListByUserId(userId);
+	}
+	
 }

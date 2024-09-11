@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.example.ch.model.Users;
 
-public interface IUsersRepository {
+public interface IUserRepository {
 
 	void addAcount (Users addAcount);
 	
@@ -17,4 +17,6 @@ public interface IUsersRepository {
 	Users findByEmail(String email);
 	
 	List<Users> getUserNameList(List<String> userIdList);
+	
+	String getUserName(String userId);
 }

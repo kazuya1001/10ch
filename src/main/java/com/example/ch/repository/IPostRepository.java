@@ -11,4 +11,6 @@ public interface IPostRepository {
 	List<String> getAllPostId();
 	
 	List<Posts> getHomePost();
+	
+	List<Posts> getPostListByUserId(String userId);
 }

@@ -34,7 +34,7 @@ function getHomeTable(){
 				var postHTML = `
                     <div class="post">
                         <div class="post-header">
-                            <span class="post-user">${response.userNameRecord[index]}</span>
+                            <span class="post-user" onclick="redirectToUserDetail('${post.userId}')">${response.userNameRecord[index]}</span>
                             <span class="post-date">${formattedDate}</span>
                         </div>
                         <h2 class="post-title">タイトル：${post.title}</h2>
@@ -48,8 +48,13 @@ function getHomeTable(){
 		console.error('Error:', error);
 		$('#error-message').text('サーバーエラーが発生しました。').show();
 	}
-	 })
+	 });
  }
+ 
+ // ユーザ詳細画面に遷移
+function redirectToUserDetail(userId) {
+    window.location.href = `/user-detail?userId=${userId}`;
+}
  
  /* 初期化 */
  const init = function(){

@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.example.ch.common.ChUtil;
 import com.example.ch.model.Users;
-import com.example.ch.repository.IUsersRepository;
+import com.example.ch.repository.IUserRepository;
 import com.example.ch.response.SignUpResponse;
 @Service
 public class SignUpService implements ISignUpService {
 	@Autowired
-	private IUsersRepository iUsersRepository;
+	private IUserRepository iUserRepository;
 	@Autowired
 	SignUpResponse signUpResponse = new SignUpResponse();
 	@Autowired
@@ -40,7 +40,7 @@ public class SignUpService implements ISignUpService {
 				String hashPass = hex.formatHex(sha256Byte);
 				addAcount.setPasswordHash(hashPass);
 				// アカウント追加処理
-				iUsersRepository.addAcount(addAcount);
+				iUserRepository.addAcount(addAcount);
 				signUpResponse = addResponse(chUtil.SUCCESS,0,null);
 			} else {
 				System.out.println("登録済みチェックNG");
@@ -58,8 +58,8 @@ public class SignUpService implements ISignUpService {
 	public boolean registeredCheck(String userId,String email) {
 		System.out.println("SignUpResponse.registeredCheck()呼び出し");
 		boolean result = false;
-		int countUserId = iUsersRepository.countUserIdRegistered(userId);
-		int countEmail = iUsersRepository.countEmailRegistered(email);
+		int countUserId = iUserRepository.countUserIdRegistered(userId);
+		int countEmail = iUserRepository.countEmailRegistered(email);
 		if(countUserId == 0 && countEmail == 0) {
 			result =  true;
 		}

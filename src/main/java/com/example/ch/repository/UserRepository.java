@@ -10,7 +10,7 @@ import com.example.ch.model.Users;
 import com.example.ch.model.UsersExample;
 
 @Repository
-public class UserRepository implements IUsersRepository {
+public class UserRepository implements IUserRepository {
 	
 	@Autowired
 	private UsersMapper usersMapper;
@@ -59,5 +59,11 @@ public class UserRepository implements IUsersRepository {
 	@Override
 	public List<Users> getUserNameList(List<String> userIdList) {
 	    return usersMapper.selectUsersNameList(userIdList);
+	}
+	
+	// userIdをキーにuserName取得
+	@Override 
+	public String getUserName(String userId) {
+		return usersMapper.selectUserNameByUserId(userId);
 	}
 }

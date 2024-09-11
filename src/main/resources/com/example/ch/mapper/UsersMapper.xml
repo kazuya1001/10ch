@@ -254,4 +254,11 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+    <select id="selectUserNameByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from public.users
+    where user_id = #{userId,jdbcType=VARCHAR}
+    LIMIT 1
+  </select>
 </mapper>
