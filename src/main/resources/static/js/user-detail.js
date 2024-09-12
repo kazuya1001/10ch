@@ -18,11 +18,14 @@ function getUserPosts() {
         url: '/api/getUserPosts',
         type: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify(userId),
+        data: userId,
         success: function(response) {
+			var poster = $('#poster');
+			var userName = response.userName + "さんの投稿一覧";
+			poster.append(userName);      
             var postsContainer = $('#user-posts');
-            postsContainer.empty(); 
-            response.forEach(function(post) {
+            postsContainer.empty();
+            response.postRecord.forEach(function(post) {
                 var postHtml = `
                     <div class="post">
                         <h2>${post.title}</h2>
@@ -37,7 +40,7 @@ function getUserPosts() {
             alert('エラーが発生しました。');
         }
     });
-});
+}
 
 
  /* 初期化 */

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.ch.common.ChUtil;
 import com.example.ch.model.Posts;
+import com.example.ch.model.Users;
 import com.example.ch.repository.IPostRepository;
 import com.example.ch.repository.IUserRepository;
 import com.example.ch.response.UserDetailResponse;
@@ -25,9 +26,14 @@ public class UserDetailService implements IUserDetailService {
     
 	public UserDetailResponse getUserPosts(String userId) {
 		System.out.println("UserDetailResponse.getUserPosts()呼び出し");
+		Users dbUser = new Users();
 		try {
 			List<Posts> postRecord = iPostRepository.getPostListByUserId(userId);
-			String userName = iUserRepository.getUserName(userId);
+			dbUser = iUserRepository.findByUserId(userId);
+			if (dbUser == null) {
+				throw new RuntimeException("対象のユーザが見つかりませんでした");
+			}
+			String userName = dbUser.getUserName();
 			userDetailResponse = addResponse(chUtil.SUCCESS,0,null,postRecord,userName);
 		}catch(Exception e) {
 			System.out.println(e);
@@ -38,7 +44,7 @@ public class UserDetailService implements IUserDetailService {
 	
 	// 処理結果追加
 	private UserDetailResponse addResponse(int processResult,int httpStatusCd,String errMessage,List<Posts> postRecord,String userName) {
-		System.out.println("NewPostService.addResponse()呼び出し");
+		System.out.println("UserDetailResponse.addResponse()呼び出し");
 		userDetailResponse.setProcessResult(processResult);
 		userDetailResponse.setHttpStatusCd(httpStatusCd);
 		userDetailResponse.setErrMessage(errMessage);

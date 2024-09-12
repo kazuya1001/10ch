@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.ch.mapper.PostsMapper;
 import com.example.ch.model.Posts;
+import com.example.ch.model.PostsExample;
 @Repository
 public class PostRepository implements IPostRepository {
 	
@@ -31,7 +32,11 @@ public class PostRepository implements IPostRepository {
 	
 	// 投稿一覧取得(ユーザ詳細画面)
 	public List<Posts> getPostListByUserId(String userId){
-		return postsMapper.selectPostListByUserId(userId);
+		PostsExample example = new PostsExample();
+		PostsExample.Criteria criteria = example.createCriteria();
+		criteria.andUserIdEqualTo(userId);
+		example.setOrderByClause("update_at DESC");
+		return postsMapper.selectByExample(example);
 	}
 	
 }

@@ -64,6 +64,10 @@ public class UserRepository implements IUserRepository {
 	// userIdをキーにuserName取得
 	@Override 
 	public String getUserName(String userId) {
-		return usersMapper.selectUserNameByUserId(userId);
+		UsersExample example = new UsersExample();
+		UsersExample.Criteria criteria = example.createCriteria();
+		criteria.andUserIdEqualTo(userId);
+		Users user = usersMapper.selectByExample(example);
+		return user.getUserName();
 	}
 }
