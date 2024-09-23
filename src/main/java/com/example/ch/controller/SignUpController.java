@@ -20,7 +20,7 @@ public class SignUpController {
 	SignUpResponse signUpResponse = new SignUpResponse();
 	
 	// サインアップ画面表示
-	@GetMapping("sign-up")
+	@GetMapping("/sign-up")
 	public String init() {
 		System.out.println("SignUpController.init()呼び出し");
 		return "sign-up";

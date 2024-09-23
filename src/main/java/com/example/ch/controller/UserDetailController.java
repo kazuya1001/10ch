@@ -20,7 +20,7 @@ public class UserDetailController {
     UserDetailResponse userDetailResponse = new UserDetailResponse();
     
 	// ユーザ詳細画面表示
-	@GetMapping("user-detail")
+	@GetMapping("/user-detail")
 	public String init() {
 		System.out.println("UserDetailController.init()呼び出し");
 		return "user-detail";
@@ -32,7 +32,6 @@ public class UserDetailController {
 	public UserDetailResponse getUserPosts(@RequestBody String userId, Model model) {
 		System.out.println("UserDetailController.getUserPosts()呼び出し");
 		userDetailResponse = iUserDetailService.getUserPosts(userId);
-		String userName = userDetailResponse.getUserName();
 		return userDetailResponse;
 	}
 }

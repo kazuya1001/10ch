@@ -10,7 +10,7 @@
 	
  }
  
- // 日付フォーマット関数
+// 日付フォーマット関数
 function formatDate(dateString) {
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -37,9 +37,8 @@ function getHomeTable(){
                             <span class="post-user" onclick="redirectToUserDetail('${post.userId}')">${response.userNameRecord[index]}</span>
                             <span class="post-date">${formattedDate}</span>
                         </div>
-                        <h2 class="post-title">タイトル：${post.title}</h2>
+                        <h2 class="post-title" onclick="redirectToPostDetail('${post.postId}')">タイトル：${post.title} </h2>
                         <p class="post-content">内容：${post.content}</p>
-                        <input type="hidden" name="post_id" value="${post.postId}">
                     </div>`;
 				$('#posts-container').append(postHTML);
 			});
@@ -51,9 +50,14 @@ function getHomeTable(){
 	 });
  }
  
- // ユーザ詳細画面に遷移
+// ユーザ詳細画面に遷移
 function redirectToUserDetail(userId) {
     window.location.href = `/user-detail?userId=${userId}`;
+}
+
+// 投稿詳細画面に遷移
+function redirectToPostDetail(postId) {
+	window.location.href = `/posts/post-detail?postId=${encodeURIComponent(postId)}`;
 }
  
  /* 初期化 */

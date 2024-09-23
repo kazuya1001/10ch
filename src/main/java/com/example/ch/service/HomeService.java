@@ -53,7 +53,7 @@ public class HomeService implements IHomeService {
 	
 	// 処理結果追加
 	private HomeResponse addResponse(int processResult,int httpStatusCd,String errMessage,List<Posts> postRecord,List<String> userNameRecord) {
-		System.out.println("NewPostService.addResponse()呼び出し");
+		System.out.println("HomeService.addResponse()呼び出し");
 		homeResponse.setProcessResult(processResult);
 		homeResponse.setHttpStatusCd(httpStatusCd);
 		homeResponse.setErrMessage(errMessage);
