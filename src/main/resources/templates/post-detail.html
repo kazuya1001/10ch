@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>投稿詳細画面</title>
+	<meta charset="UTF-8">
+	<title>投稿詳細画面</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/post-detail.js}"></script>
+    <script type="text/javascript" th:src="@{/js/common/messages.js}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/post-detail.css}">
 </head>
 <body>
     <header>
@@ -11,7 +16,11 @@
         </div>
         <div class="header-right">
             <button type="button" onclick="location.href='/home'">HOME</button>
+            <button type="button" onclick="location.href='/posts/new'">NEW-POST</button>
+            <button type="button" onclick="location.href='/home'">SIGN-OUT</button>
         </div>
     </header>
+    <div id="post-container" class="post-container"></div>
+	<div id="error-message" class="alert alert-danger" style="display:none;"></div>
 </body>
 </html>

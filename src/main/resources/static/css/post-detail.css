@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
     font-family: Arial, sans-serif;
     background-color: #e0f0ff;
@@ -47,32 +48,31 @@ header button:hover {
     background-color: #0056b3;
 }
 
-.user-name-title {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.post {
-    background-color: #ffffff;
-    padding: 20px;
-    margin: 10px 0;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 .post-header {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.post-date {
+    text-align: right;
+    color: #6c757d;
+}
+
+.post-user {
+	text-align: left;
+}
+
+.post-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
 }
 
 .post-title {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-#poster {
-    font-size: 1.5em;
-    margin-bottom: 10px;
+    font-size: 1em;
+    text-align: left;
 }
 
 .post-content {
@@ -80,6 +80,7 @@ header button:hover {
     margin-bottom: 10px;
     text-align: left;
 }
+
 .post {
     background-color: #fff;
     padding: 20px;
@@ -89,16 +90,4 @@ header button:hover {
     text-align: center; 
     display: inline-block; 
     width: 100%;
-}
-
-.post-date {
-    text-align: right;
-    color: #6c757d;
-}
-
-.post-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
 }

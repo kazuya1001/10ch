@@ -19,14 +19,22 @@ public class UserDetailController {
     @Autowired
     UserDetailResponse userDetailResponse = new UserDetailResponse();
     
-	// ユーザ詳細画面表示
+	/**
+	 * ユーザ詳細画面表示
+	 * @return htmlファイル "user-detail"
+	 */
 	@GetMapping("/user-detail")
 	public String init() {
 		System.out.println("UserDetailController.init()呼び出し");
 		return "user-detail";
 	}
 	
-	//　ユーザ投稿取得機能
+	/**
+	 * ユーザ投稿取得機能
+	 * @param userId ユーザID
+	 * @param model モデル
+	 * @return userDetailResponse 処理結果
+	 */
 	@PostMapping("/api/getUserPosts")
 	@ResponseBody
 	public UserDetailResponse getUserPosts(@RequestBody String userId, Model model) {

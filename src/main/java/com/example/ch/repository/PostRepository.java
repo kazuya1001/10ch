@@ -15,12 +15,11 @@ public class PostRepository implements IPostRepository {
 	private PostsMapper postsMapper;
 	
 	// 新規投稿(新規投稿画面)
-	@Override
 	public void createPost(Posts post) {
 		postsMapper.insert(post);
 	}
 	
-	// post_id取得(新規投稿画面)
+	// ポストID取得(新規投稿画面)
 	public List<String> getAllPostId(){
 		return postsMapper.selectAllPostIds();
 	}
@@ -39,4 +38,11 @@ public class PostRepository implements IPostRepository {
 		return postsMapper.selectByExample(example);
 	}
 	
+    // 対象投稿取得(投稿詳細画面)
+	public Posts getTargetPost(String postId) {
+		PostsExample example = new PostsExample();
+		PostsExample.Criteria criteria = example.createCriteria();
+		criteria.andPostIdEqualTo(postId);
+		return postsMapper.selectByPrimaryKey(postId);
+	}
 }

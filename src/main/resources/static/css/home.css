@@ -89,23 +89,33 @@ header button:hover {
     margin-bottom: 10px;
 }
 
-.post-user {
-    text-align: left;
-    font-weight: bold;
-}
-
 .post-date {
     text-align: right;
     color: #6c757d;
 }
 
 .post-user {
+	text-align: left;
+    font-weight: bold;
     color: #007bff;
 	text-decoration: underline; 
     cursor: pointer; 
 }
 
 .post-user:hover {
+    color: #0056b3;
+	cursor: pointer; 
+}
+
+.post-title {
+	text-align: left;
+    font-weight: bold;
+    color: #007bff;
+	text-decoration: underline; 
+    cursor: pointer; 
+}
+
+.post-title:hover {
     color: #0056b3;
 	cursor: pointer; 
 }

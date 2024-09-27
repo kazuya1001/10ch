@@ -23,7 +23,7 @@ function formatDate(dateString) {
 }
 
 function getUserPosts() {
-    // ユーザ詳細データを取得して表示する処理
+    // URLからuserIdを取得
     var userId = new URLSearchParams(window.location.search).get('userId');
 
     $.ajax({
@@ -35,15 +35,18 @@ function getUserPosts() {
 			var poster = $('#poster');
 			var userName = response.userName + "さんの投稿一覧";
 			poster.append(userName);      
-            var postsContainer = $('#user-posts');
+            var postsContainer = $('#post-container');
             postsContainer.empty();
             response.postRecord.forEach(function(post) {
 				const formattedDate = formatDate(post.updateAt);
                 var postHtml = `
                     <div class="post">
-                        <h2>${post.title}</h2>
-                        <p>${post.content}</p>
-                        <p>投稿日: ${formattedDate}</p>
+                        <div class="post-header">
+                            <h2>タイトル：${post.title}</h2>
+                            <span class="post-date">投稿日：${formattedDate}</span>
+                        </div>
+                            <p class="post-content">内容：<br>${post.content}</p>
+                        </div>
                     </div>`;
                 postsContainer.append(postHtml);
             });
