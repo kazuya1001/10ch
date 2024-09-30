@@ -13,6 +13,8 @@ import com.example.ch.model.Users;
 import com.example.ch.repository.IPostRepository;
 import com.example.ch.repository.IUserRepository;
 import com.example.ch.response.HomeResponse;
+
+import jakarta.servlet.http.HttpSession;
 @Service
 public class HomeService implements IHomeService {
 
@@ -27,22 +29,30 @@ public class HomeService implements IHomeService {
 	
 	// ホーム画面表示用最新5投稿取得
 	@Override
-	public HomeResponse getHomePost() {
+	public HomeResponse getHomePost(HttpSession session) {
 		try {
-			List<Posts> postRecord = iPostRepository.getHomePost();
-	        List<String> userIdList = postRecord.stream().map(Posts::getUserId).collect(Collectors.toList());
-	        List<Users> userNameList= iUserRepository.getUserNameList(userIdList);
+			Users userInfo = (Users) session.getAttribute("user");
+			List<Posts> postList = new ArrayList<Posts>();
+	        List<String> userIdList = new ArrayList<String>();
+	        List<Users> userNameList = new ArrayList<Users>();
+			if (userInfo == null) {
+				postList = iPostRepository.getHomePostListToUserInfoNull();
+			} else {
+				postList = iPostRepository.getHomePostList();
+			}
+			userIdList = postList.stream().map(Posts::getUserId).collect(Collectors.toList());
+			userNameList = iUserRepository.getUserNameListToUserInfoNull(userIdList);
 	        List<String> userNameRecord = new ArrayList<String>();
 	        // usersテーブルとpostsテーブルのuserIdを比較しuserNameをホーム画面の投稿順に並べる
-			for (int i = 0; i < postRecord.size();i++) {
+			for (int i = 0; i < postList.size();i++) {
 				for (int j = 0; j< userNameList.size(); j++) {
-					if (postRecord.get(i).getUserId().equals(userNameList.get(j).getUserId())) {
+					if (postList.get(i).getUserId().equals(userNameList.get(j).getUserId())) {
 						userNameRecord.add(userNameList.get(j).getUserName());
 						break;
 					}
 				}
 			}
-			homeResponse = addResponse(chUtil.SUCCESS,0,null,postRecord,userNameRecord);
+			homeResponse = addResponse(chUtil.SUCCESS,0,null,postList,userNameRecord);
 		}catch(Exception e){
 			System.out.println(e);
 			homeResponse = addResponse(chUtil.FAILURE_1,0,chUtil.ERROR_DB,null,null);

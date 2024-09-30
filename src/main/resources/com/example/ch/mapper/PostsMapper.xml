@@ -291,4 +291,8 @@
 	ORDER BY update_at DESC 
 	LIMIT 5
   </select>
+  <select id="selectAllPost" resultType="com.example.ch.model.Posts" resultMap="BaseResultMap">
+	SELECT * FROM posts 
+	ORDER BY update_at DESC 
+  </select>
 </mapper>

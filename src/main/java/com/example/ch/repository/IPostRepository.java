@@ -22,7 +22,13 @@ public interface IPostRepository {
      * 最新5投稿取得(ホーム画面)
      * @return 投稿一覧
      */
-	List<Posts> getHomePost();
+	List<Posts> getHomePostListToUserInfoNull();
+	
+    /**
+     * 全投稿取得(ホーム画面)
+     * @return 投稿一覧
+     */
+	List<Posts> getHomePostList();
 	
     /**
      * 投稿一覧取得(ユーザ詳細画面)

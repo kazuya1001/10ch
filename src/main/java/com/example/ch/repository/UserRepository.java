@@ -57,7 +57,7 @@ public class UserRepository implements IUserRepository {
 	
 	// postsテーブルのuserIdをキーにuserName取得
 	@Override
-	public List<Users> getUserNameList(List<String> userIdList) {
+	public List<Users> getUserNameListToUserInfoNull(List<String> userIdList) {
 	    return usersMapper.selectUsersNameList(userIdList);
 	}
 	

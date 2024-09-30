@@ -16,7 +16,7 @@ public interface IUserRepository {
 	
 	Users findByEmail(String email);
 	
-	List<Users> getUserNameList(List<String> userIdList);
+	List<Users> getUserNameListToUserInfoNull(List<String> userIdList);
 	
 	String getUserName(String userId);
 }

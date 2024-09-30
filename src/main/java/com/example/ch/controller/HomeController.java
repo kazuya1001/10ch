@@ -10,6 +10,8 @@ import com.example.ch.common.ChUtil;
 import com.example.ch.response.HomeResponse;
 import com.example.ch.service.IHomeService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class HomeController {
 
@@ -28,9 +30,9 @@ public class HomeController {
 	// ホーム画面用テーブル取得
 	@PostMapping("/api/getHomePost")
 	@ResponseBody
-	public HomeResponse getHomePost() {
+	public HomeResponse getHomePost(HttpSession session) {
 		HomeResponse homeResponse = new HomeResponse();
-		homeResponse = iHomeService.getHomePost();
+		homeResponse = iHomeService.getHomePost(session);
 		return homeResponse;
 	}
 }

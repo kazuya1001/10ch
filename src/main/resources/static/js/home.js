@@ -28,20 +28,21 @@ function getHomeTable(){
 	url: '/api/getHomePost',
 	type: 'post',
 	success: function(response) {
-			$('#posts-container').empty();
-			response.postRecord.forEach(function(post, index) {
-				const formattedDate = formatDate(post.updateAt);
-				var postHTML = `
-                    <div class="post">
-                        <div class="post-header">
-                            <span class="post-user" onclick="redirectToUserDetail('${post.userId}')">${response.userNameRecord[index]}</span>
-                            <span class="post-date">${formattedDate}</span>
-                        </div>
-                        <h2 class="post-title" onclick="redirectToPostDetail('${post.postId}')">タイトル：${post.title} </h2>
-                        <p class="post-content">内容：${post.content}</p>
-                    </div>`;
-				$('#posts-container').append(postHTML);
-			});
+		var userName = /*[[${session.user}]]*/ 'defaultUser';
+		$('#posts-container').empty();
+		response.postRecord.forEach(function(post, index) {
+			const formattedDate = formatDate(post.updateAt);
+			var postHTML = `
+                <div class="post">
+                    <div class="post-header">
+                        <span class="post-user" onclick="redirectToUserDetail('${post.userId}')">${response.userNameRecord[index]}</span>
+                        <span class="post-date">${formattedDate}</span>
+                    </div>
+                    <h2 class="post-title" onclick="redirectToPostDetail('${post.postId}')">タイトル：${post.title} </h2>
+                    <p class="post-content">内容：${post.content}</p>
+                </div>`;
+			$('#posts-container').append(postHTML);
+		});
 	},
 	error: function(error) {
 		console.error('Error:', error);

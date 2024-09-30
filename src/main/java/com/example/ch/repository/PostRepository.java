@@ -24,9 +24,13 @@ public class PostRepository implements IPostRepository {
 		return postsMapper.selectAllPostIds();
 	}
 	
-	// 投稿一覧取得(ホーム画面)
-	public List<Posts> getHomePost(){
+	// 最新5投稿一覧取得(ホーム画面)
+	public List<Posts> getHomePostListToUserInfoNull(){
 		return postsMapper.selectRecentPosts();
+	}
+	
+	public List<Posts> getHomePostList(){
+		return postsMapper.selectAllPost();
 	}
 	
 	// 投稿一覧取得(ユーザ詳細画面)
