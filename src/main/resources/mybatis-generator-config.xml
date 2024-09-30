@@ -11,12 +11,7 @@
         <javaModelGenerator targetPackage="com.example.ch.model" targetProject="src/main/java"/>
         <sqlMapGenerator targetPackage="com.example.ch.mapper" targetProject="src/main/resources"/>
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.ch.mapper" targetProject="src/main/java"/>
-        <table schema="public" tableName="posts"/>
+        <table schema="public" tableName="comments"/>
+ 
     </context>
 </generatorConfiguration>
-<configuration>
-    <settings>
-        <setting name="mapUnderscoreToCamelCase" value="true"/>
-    </settings>
-    <!-- 他の設定 (環境設定、マッピングファイルのパスなど) -->
-</configuration>

@@ -14,7 +14,7 @@
 		<name>10ch</name>
 		<description>Demo project for Spring Boot</description>
 		<properties>
-			<java.version>21</java.version>
+			<java.version>17</java.version>
 		</properties>
 		<dependencies>
 			<dependency>
@@ -61,34 +61,33 @@
 <build>
     <plugins>
         <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-        </plugin>
-        <plugin>
             <groupId>org.mybatis.generator</groupId>
             <artifactId>mybatis-generator-maven-plugin</artifactId>
             <version>1.4.0</version>
+            <configuration>
+                <configurationFile>src/main/resources/mybatis-generator-config.xml</configurationFile>
+                <verbose>true</verbose>
+                <overwrite>true</overwrite>
+            </configuration>
             <dependencies>
                 <dependency>
                     <groupId>org.postgresql</groupId>
                     <artifactId>postgresql</artifactId>
-                    <version>42.5.4</version>
+                    <version>42.7.3</version>
                 </dependency>
             </dependencies>
-            <configuration>
-                <configurationFile>src/main/resources/mybatis-generator-config.xml</configurationFile>
-                <overwrite>true</overwrite>
-            </configuration>
             <executions>
-                <id>generate-sources</id>
-                <phase>generate-sources</phase>
-                <goals>
-                    <goal>generate</goal>
-                </goals>
+                <execution>
+                    <id>generate-sources</id>
+                    <goals>
+                        <goal>generate</goal>
+                    </goals>
+                </execution>
             </executions>
         </plugin>
     </plugins>
 </build>
+
 		<repositories>
 			<repository>
 				<id>spring-milestones</id>
