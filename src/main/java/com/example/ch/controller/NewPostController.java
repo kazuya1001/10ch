@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.ch.model.Posts;
 import com.example.ch.response.NewPostResponse;
 import com.example.ch.service.INewPostService;
 
@@ -16,6 +15,9 @@ public class NewPostController {
 	
 	@Autowired
 	private INewPostService iNewPostService;
+	@Autowired
+	NewPostResponse newPostResponse = new NewPostResponse();
+
 	
 	// 新規投稿画面表示
 	@GetMapping("/posts/new")
@@ -29,13 +31,8 @@ public class NewPostController {
 	@ResponseBody
 	public NewPostResponse newPost(@RequestParam String title, String content, String userId) {
 		System.out.println("NewPostController.newPost()呼び出し");
-		NewPostResponse newPostResponse = new NewPostResponse();
-		Posts newPost = new Posts();
-		newPost.setTitle(title);
-		newPost.setContent(content);
-		newPost.setUserId(userId);
 		// 新規投稿処理
-		newPostResponse = iNewPostService.createPost(newPost);
+		newPostResponse = iNewPostService.createPost(title, content, userId);
 		return newPostResponse;
 	}
 }

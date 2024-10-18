@@ -10,7 +10,10 @@ import jakarta.servlet.http.HttpSession;
 @RestController
 public class SessionController {
 
-	// セッション情報からユーザ情報取り出し
+	/**
+	 * @param content 内容
+	 * @return user ログイン情報
+	 */
 	@GetMapping("api/getUserInfo")
 	@ResponseBody
 	public Users getUserInfo(HttpSession session) {

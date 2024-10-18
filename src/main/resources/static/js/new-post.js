@@ -38,18 +38,19 @@ $(document).ready(function() {
 		const title = $('#title').val().trim();
 		const content = $('#content').val().trim();
 
-		$('#error-message').empty(); // エラーメッセージエリアをクリア
+        // エラーメッセージエリアをクリア
+		$('#error-message').empty();
 
 		// 入力チェック
         let errorMessage = '';
         if (!title) {
-            errorMessage += 'タイトルを入力してください';
+            errorMessage += messageList.error.E0001;
         }
         if (!content) {
 			if(errorMessage){
 				errorMessage = 'タイトルと';
 			}
-            errorMessage += '内容を入力してください';
+            errorMessage += messageList.error.E0002;
         }
         
         // エラーメッセージの表示と処理の中断
@@ -76,6 +77,8 @@ $(document).ready(function() {
 					$('#error-message').text(errMsg + messageList.info.I0001);
 					return;
 				} 
+				alert('投稿されました！');
+                location.reload(); // ページをリロードしてコメントを表示
 			},
 			error: function(error) {
 				console.error('Error:', error);

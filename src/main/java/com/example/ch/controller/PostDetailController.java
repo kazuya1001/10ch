@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.ch.response.CommentResponse;
 import com.example.ch.response.PostDetailResponse;
 import com.example.ch.service.IPostDetailService;
 @Controller
@@ -17,6 +19,8 @@ public class PostDetailController {
     private IPostDetailService iPostDetailService;
     @Autowired
     PostDetailResponse postDetailResponse = new PostDetailResponse();
+    @Autowired
+    CommentResponse commentResponse = new CommentResponse();
     
 	/**
 	 * 投稿詳細画面表示
@@ -29,6 +33,7 @@ public class PostDetailController {
 	}
 	
 	/**
+	 * 投稿情報取得
 	 * @param postId ポストID
 	 * @param model モデル
 	 * @return postDetailResponse 処理結果
@@ -40,4 +45,20 @@ public class PostDetailController {
 		postDetailResponse = iPostDetailService.getTargetPost(postId);
 		return postDetailResponse;
 	}
+	
+	/**
+	 * コメント登録
+	 * @param content 内容
+	 * @param postId ポストID
+	 * @param userId ユーザID
+	 * @return postDetailResponse 処理結果
+	 */
+	@PostMapping("/api/postComment")
+	@ResponseBody
+	public CommentResponse postComment(@RequestParam String content,String postId, String userId) {
+		System.out.println("UserDetailController.postComment()呼び出し");
+		commentResponse = iPostDetailService.postComment(content, postId, userId);
+		return commentResponse;
+	}
+	
 }

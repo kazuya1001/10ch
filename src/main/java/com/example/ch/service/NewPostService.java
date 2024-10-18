@@ -23,15 +23,19 @@ public class NewPostService implements INewPostService {
 	
 	// 新規投稿機能
 	@Override
-	public NewPostResponse createPost(Posts newPost) {
+	public NewPostResponse createPost(String title, String content, String userId) {
 		System.out.println("NewPostService.createPost()呼び出し");
 		try {
+			Posts newPost = new Posts();
 			String postId = getUniquePostId();
 			if (postId.equals(chUtil.NO_REMAINDER)) {
 				newPostResponse = addResponse(chUtil.FAILURE_2,0,chUtil.CAN_NOT_POST);
 				return newPostResponse;
 			}
 			Date CreatTime = new Date();
+			newPost.setTitle(title);
+			newPost.setContent(content);
+			newPost.setUserId(userId);
 			newPost.setUpdateAt(CreatTime);
 			newPost.setPostId(postId);
 			iPostRepository.createPost(newPost);

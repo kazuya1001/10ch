@@ -2,17 +2,17 @@
  * 投稿詳細機能
  */
 
+let userId;
  // ユーザ詳細画面表示
  function postDetailDisp(){
-	// セッション情報取得
-	let userInfo;
+
 	// 画面表示時にユーザ情報を取得
     $.ajax({
         url: '/api/getUserInfo',
         type: 'get',
         dataType: 'json',
         success: function(user) {
-			userInfo = user.userId;	 
+			userId = user.userId;	 
 			// ユーザ投稿一覧表示
 	        getTargetPost();
         },
@@ -51,16 +51,16 @@ function formatDate(dateString) {
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
-function getTargetPost(){
+function getTargetPost() {
 	// URLからpostIdを取得
-    var postId = new URLSearchParams(window.location.search).get('postId');
-	
-	    $.ajax({
-        url: '/api/getTargetPost',
-        type: 'POST',
-        contentType: 'application/json',
-        data: postId,
-        success: function(response) {
+	var postId = new URLSearchParams(window.location.search).get('postId');
+
+	$.ajax({
+		url: '/api/getTargetPost',
+		type: 'POST',
+		contentType: 'application/json',
+		data: postId,
+		success: function(response) {
 			$('#post-container').empty();
 			const formattedDate = formatDate(response.post.updateAt);
 			var postHTML = `
@@ -74,12 +74,58 @@ function getTargetPost(){
                 </div>`;
 			$('#post-container').append(postHTML);
 		},
-        error: function(error) {
-            console.error('エラー:', error);
-            alert('エラーが発生しました。');
-        }
-    });
+		error: function(error) {
+			console.error('エラー:', error);
+			alert('エラーが発生しました。');
+		}
+	});
 }
+
+$(document).ready(function() {
+
+	$('#submitComment').on('click', function() {
+		// フォーム内のデータを取得
+		const content = document.getElementById('content').value.trim();
+		// エラーメッセージエリアをクリア
+		$('#error-message').empty();
+
+		// 入力チェック
+		let errorMessage = '';
+		if (!content) {
+			errorMessage += messageList.error.E0003;
+		}
+
+		// エラーメッセージの表示と処理の中断
+		if (errorMessage) {
+			$('#error-message').html(errorMessage);
+			return; // ここで処理を中断
+		}
+		
+        // URLからpostIdを取得
+	    var postId = new URLSearchParams(window.location.search).get('postId');
+
+        const data = {
+			content: content,
+			postId: postId,
+			userId: userId,
+		};
+		// AJAXリクエストを送信する
+		$.ajax({
+			type: 'POST',
+			url: '/api/postComment',
+			data: data,
+			dataType: 'json',
+			success: function(response) {
+                alert('コメントが投稿されました！');
+                location.reload(); // ページをリロードしてコメントを表示
+			},
+			error: function() {
+				$('#error-message').text('サーバーエラーが発生しました。').show();
+			}
+		});
+	});
+});
+
 
   /* 初期化 */
  const init = function(){
