@@ -13,9 +13,25 @@ $(document).ready(function() {
         },
         error: function(error) {
             console.error('Error fetching user info:', error);
-            window.location.href = '/sign-in';
+            showPopup(messageNewPost.newPost + messageStatusSignOut.messageCommon);
         }
     });
+    // ポップアップ表示
+    function showPopup(message) {
+        $('#popupMessage').text(message);
+        $('#popupOverlay').fadeIn();
+        $('#popup').fadeIn();
+	}
+	
+	// サインインボタンのクリックイベント
+	$('#signInButton').on('click',function() {
+		window.location.href = '/sign-in';
+	});
+	
+	// キャンセルボタンのクリックイベント
+	$('#cancelButton').on('click',function() {
+		window.location.href = '/home';
+	});
     
 	// 投稿ボタン押下時
 	$('#new-post-button').on('click', function() {

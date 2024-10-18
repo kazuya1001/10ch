@@ -18,10 +18,11 @@
         </div>
         <div class="header-right">
             <button type="button" onclick="location.href='/posts/new'">NEW-POST</button>
-            <button type="button" onclick="location.href='/home'">SIGN-OUT</button>
+            <button type="button" th:if="${isSignedIn}" onclick="location.href='/sign-out'">SIGN-OUT</button>
+            <button type="button" th:if="${!isSignedIn}" onclick="location.href='/sign-in'">SIGN-IN</button>
         </div>
 	</header>
-	<h1 id="home-post-title" class="home-post-title">最新5投稿</h1>
+	<h1 id="home-post-title" class="home-post-title" th:utext="${message}"></h1>
 	<div id="posts-container" class="posts-container"></div>
 	<div id="error-message" class="alert alert-danger" style="display:none;"></div>
 </body>

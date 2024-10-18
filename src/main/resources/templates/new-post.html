@@ -12,9 +12,11 @@
 
 <body>
 	<header>
-		<button type="button" onclick="location.href='/home'">Home</button>
-		<button type="button" onclick="location.href='/home'">サインアウト</button>
+		<button type="button" onclick="location.href='/home'">HOME</button>
+		<button type="button" onclick="location.href='/sign-out'">SIGN-OUT</button>
 	</header>
+	
+    <div th:replace="common/popup.html"></div>
 	<form id="new-post-form">
 		<table>
 			<tr>

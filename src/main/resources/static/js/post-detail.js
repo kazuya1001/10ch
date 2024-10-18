@@ -4,9 +4,38 @@
 
  // ユーザ詳細画面表示
  function postDetailDisp(){
-	 
-	 // ユーザ投稿一覧表示
-	 getTargetPost();
+	// セッション情報取得
+	let userInfo;
+	// 画面表示時にユーザ情報を取得
+    $.ajax({
+        url: '/api/getUserInfo',
+        type: 'get',
+        dataType: 'json',
+        success: function(user) {
+			userInfo = user.userId;	 
+			// ユーザ投稿一覧表示
+	        getTargetPost();
+        },
+        error: function(error) {
+            showPopup(messagePostDetail.postDetail + messageStatusSignOut.messageCommon); 
+        }
+    });
+    // ポップアップ表示
+    function showPopup(message) {
+        $('#popupMessage').text(message);
+        $('#popupOverlay').fadeIn();
+        $('#popup').fadeIn();
+    }
+	
+    // サインインボタンのクリックイベント
+    $('#signInButton').on('click',function() {
+	    window.location.href = '/sign-in';
+    });
+	
+    // キャンセルボタンのクリックイベント
+    $('#cancelButton').on('click',function() {
+	    window.location.href = '/home';
+    });
 	
 }
 

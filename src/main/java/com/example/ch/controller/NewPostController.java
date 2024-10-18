@@ -8,11 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.ch.model.Posts;
-import com.example.ch.model.Users;
 import com.example.ch.response.NewPostResponse;
 import com.example.ch.service.INewPostService;
-
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class NewPostController {
@@ -40,14 +37,5 @@ public class NewPostController {
 		// 新規投稿処理
 		newPostResponse = iNewPostService.createPost(newPost);
 		return newPostResponse;
-	}
-	
-	// セッション情報からユーザ情報取り出し
-	@GetMapping("api/getUserInfo")
-	@ResponseBody
-	public Users getUserInfo(HttpSession session) {
-		System.out.println("NewPostController.getUserInfo()呼び出し");
-		Users user = (Users) session.getAttribute("user");
-		return user;
 	}
 }

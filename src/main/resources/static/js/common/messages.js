@@ -29,3 +29,18 @@ const messageSignIn = {
 const messageNewPost = {
 	newPost:"新規投稿",
 };
+
+// ユーザ詳細画面で使用
+const messageUserDetail = {
+	userDetail:"ユーザ詳細",
+};
+
+// 投稿詳細画面で使用
+const messagePostDetail = {
+	postDetail:"投稿詳細",
+};
+
+// サインアウト状態時に使用
+const messageStatusSignOut = {
+	messageCommon:"を見たい場合はサインインしてください",
+}

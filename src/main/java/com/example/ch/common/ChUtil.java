@@ -21,5 +21,6 @@ public class ChUtil {
 	public final String NO_REMAINDER = "余りがありません";
 	public final String CAN_NOT_POST = "これ以上投稿できません";
 	
-	
+	/* HomeControllerで使用 */
+	public final String IS_LOGGEDOUT = "最新5投稿を表示\n他にも投稿を見たい場合はサインインしてください";
 }
