@@ -12,11 +12,15 @@
 
 <body>
 	<header>
-		<button type="button" onclick="location.href='/home'">HOME</button>
-		<button type="button" onclick="location.href='/sign-out'">SIGN-OUT</button>
+		<div class="header-left">
+			<a href="/home" class="site-title">10ch</a>
+		</div>
+		<div class="header-right">
+			<button type="button" class="signOutButton" onclick="location.href='/sign-out'">SIGN-OUT</button>
+		</div>
 	</header>
-	
-    <div th:replace="common/popup.html"></div>
+
+	<div th:replace="common/popup.html"></div>
 	<form id="new-post-form">
 		<table>
 			<tr>
@@ -24,7 +28,7 @@
 					<label　for="title">タイトル</label>
 				</td>
 				<td>
-					<input type="text" id="title"　maxlength="30" placeholder="30文字以内で入力してください">
+					<input type="text" id="title" 　maxlength="30" placeholder="30文字以内で入力してください">
 				</td>
 			</tr>
 			<tr>
@@ -32,9 +36,9 @@
 					<label　for="content">内容</label>
 				</td>
 				<td>
-					<textarea id="content"　maxlength="1000" placeholder="1000文字以内で入力してください"></textarea>
+					<textarea id="content" 　maxlength="1000" placeholder="1000文字以内で入力してください"></textarea>
 				</td>
-			</tr>		
+			</tr>
 		</table>
 		<div id="error-message" class="hint" style="color:red;"></div>
 		<button type="button" id="new-post-button">投稿</button>

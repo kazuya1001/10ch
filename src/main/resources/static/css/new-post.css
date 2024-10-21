@@ -8,12 +8,47 @@ body {
 
 header {
     background-color: #ffffff; 
-    padding: 10px 20px;
+    padding-left: 20px;
     text-align: right;
     align-items: center;
     border-bottom: 1px solid #ccc;
-    height: 3em;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between; 
+    height: 60px;
+}
+
+.site-title {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 36px; 
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none; 
+}
+
+.site-title:hover {
+    color: #0056b3;
+    cursor: pointer;
+}
+
+.screen-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.signOutButton{
+	margin-right: 10px;
 }
 
 header button {

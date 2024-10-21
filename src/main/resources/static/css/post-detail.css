@@ -10,9 +10,27 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding-left: 20px;
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 60px;
+}
+
+.signOutButton{
+	margin-right: 10px;
+}
+
+.site-title {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 36px; 
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none; 
+}
+
+.site-title:hover {
+    color: #0056b3;
+    cursor: pointer;
 }
 
 .screen-title {
@@ -138,4 +156,17 @@ header button:hover {
 
 #submitComment:hover {
     background-color: #0056b3;
+}
+
+.post-user {
+	text-align: left;
+    font-weight: bold;
+    color: #007bff;
+	text-decoration: underline; 
+    cursor: pointer; 
+}
+
+.post-user:hover {
+    color: #0056b3;
+	cursor: pointer; 
 }

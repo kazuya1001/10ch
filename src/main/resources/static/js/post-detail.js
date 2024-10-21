@@ -66,7 +66,7 @@ function getTargetPost() {
 			var postHTML = `
                 <div class="post">
                     <div class="post-header">
-                        <span class="post-user">投稿者：${response.userName}</span>
+                        <span class="post-user" onclick="redirectToUserDetail('${response.post.userId}')">投稿者：${response.userName}</span>
                         <span class="post-date">投稿日：${formattedDate}</span>
                     </div>
                     <h2 class="post-title">タイトル：${response.post.title}</h2>
@@ -79,6 +79,11 @@ function getTargetPost() {
 			alert('エラーが発生しました。');
 		}
 	});
+}
+
+// ユーザ詳細画面に遷移
+function redirectToUserDetail(userId) {
+    window.location.href = `/user-detail?userId=${userId}`;
 }
 
 $(document).ready(function() {

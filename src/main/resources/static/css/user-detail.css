@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
     font-family: Arial, sans-serif;
     background-color: #e0f0ff;
@@ -9,9 +10,23 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding-left: 20px;
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 60px;
+}
+
+.site-title {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 36px; 
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none; 
+}
+
+.site-title:hover {
+    color: #0056b3;
+    cursor: pointer;
 }
 
 .screen-title {
@@ -65,19 +80,14 @@ header button:hover {
     justify-content: space-between;
 }
 
-.post-title {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
 #poster {
     font-size: 1.5em;
-    margin-bottom: 10px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .post-content {
     font-size: 1em;
-    margin-bottom: 10px;
     text-align: left;
 }
 .post {
@@ -99,11 +109,19 @@ header button:hover {
 .post-container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
     text-align: center;
 }
 
-h2 {
-	margin-block-end:0px;
-	margin-block-start:0px;
+.post-title {
+	text-align: left;
+    font-weight: bold;
+    color: #007bff;
+	text-decoration: underline; 
+    cursor: pointer; 
+    margin:0;
+}
+
+.post-title:hover {
+    color: #0056b3;
+	cursor: pointer; 
 }

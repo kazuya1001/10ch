@@ -72,7 +72,7 @@ function getUserPosts() {
                 var postHtml = `
                     <div class="post">
                         <div class="post-header">
-                            <h2>タイトル：${post.title}</h2>
+                            <h2 class="post-title" onclick="redirectToPostDetail('${post.postId}')">タイトル：${post.title} </h2>
                             <span class="post-date">投稿日：${formattedDate}</span>
                         </div>
                             <p class="post-content">内容：<br>${post.content}</p>
@@ -88,6 +88,10 @@ function getUserPosts() {
     });
 }
 
+// 投稿詳細画面に遷移
+function redirectToPostDetail(postId) {
+	window.location.href = `/posts/post-detail?postId=${encodeURIComponent(postId)}`;
+}
 
  /* 初期化 */
  const init = function(){

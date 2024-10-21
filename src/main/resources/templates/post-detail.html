@@ -12,12 +12,11 @@
 <body>
     <header>
         <div class="header-left">
-            <span class="screen-title">投稿詳細</span>
+            <a href="/home" class="site-title">10ch</a>
         </div>
         <div class="header-right">
-            <button type="button" onclick="location.href='/home'">HOME</button>
             <button type="button" onclick="location.href='/posts/new'">NEW-POST</button>
-            <button type="button" onclick="location.href='/home'">SIGN-OUT</button>
+            <button type="button" class="signOutButton" onclick="location.href='/home'">SIGN-OUT</button>
         </div>
     </header>
     <div th:replace="common/popup.html"></div>

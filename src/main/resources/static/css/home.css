@@ -10,10 +10,23 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding-left: 20px;
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 3em;
+    height: 60px;
+}
+
+.site-title {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 36px; 
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none; 
+}
+
+.site-title:hover {
+    color: #0056b3;
+    cursor: pointer;
 }
 
 .screen-title {
@@ -56,37 +69,38 @@ header button:hover {
 .post {
     background-color: #fff;
     padding: 20px;
-    margin-bottom: 20px;
+    margin: 5px auto;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center; 
+    text-align: left; 
     display: inline-block; 
     width: 100%;
+    max-width: 800px;
 }
 
 .posts-container {
+	width: 100%;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
     text-align: center;
+    box-sizing: border-box;
+    padding-left: 0px;
+    padding-right: 40px;
 }
 
-.post-title {
-    font-size: 1em;
-    text-align: left;
-}
 
 .post-content {
     font-size: 1em;
-    margin-bottom: 10px;
     text-align: left;
+    margin-bottom:5px;
 }
 
 
 .post-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    align-items: center;
 }
 
 .post-date {
@@ -99,7 +113,8 @@ header button:hover {
     font-weight: bold;
     color: #007bff;
 	text-decoration: underline; 
-    cursor: pointer; 
+    cursor: pointer;
+    font-size: 20px;
 }
 
 .post-user:hover {
@@ -113,6 +128,8 @@ header button:hover {
     color: #007bff;
 	text-decoration: underline; 
     cursor: pointer; 
+    margin:0;
+    font-size: 20px;
 }
 
 .post-title:hover {

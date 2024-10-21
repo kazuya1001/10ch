@@ -12,10 +12,13 @@
 </head>
 
 <body>
-	<!--header-->
 	<header>
-		<button type="button" class="homeButton" onclick="location.href='/home'">Home</button>
-		<button type="button" class="signInButton" onclick="location.href='/sign-in'">Sign In</button>
+		<div class="header-left">
+            <a href="/home" class="site-title">10ch</a>
+        </div>
+        <div class="header-right">
+		    <button type="button" class="signInButton" onclick="location.href='/sign-in'">Sign In</button>
+        </div>
 	</header>
 	<div class="logoContainer">
         <img src="/img/logo10ch.webp" class="logo">
@@ -69,10 +72,10 @@
 				<td>
 					<input type="email" id="email">
 					<div id="email-hint" class="hint">有効なメールアドレスを入力してください</div>
+		    <div id="error-message" class="hint" style="color:red;"></div>
 				</td>
 			</tr>
 		</table>
-		<div id="error-message" class="hint" style="color:red;"></div>
 		<button type="button" id="sign-up-button" class="signUpButton" disabled>Sign Up</button>
 	</form>
 </body>
