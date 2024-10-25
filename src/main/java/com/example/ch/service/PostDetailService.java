@@ -1,5 +1,6 @@
 package com.example.ch.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.ch.common.ChUtil;
 import com.example.ch.model.Comments;
 import com.example.ch.model.Posts;
+import com.example.ch.model.Users;
 import com.example.ch.repository.ICommentsRepository;
 import com.example.ch.repository.IPostRepository;
 import com.example.ch.repository.IUserRepository;
@@ -24,7 +26,7 @@ public class PostDetailService implements IPostDetailService {
     @Autowired
     PostDetailResponse postDetailResponse = new PostDetailResponse();
     @Autowired
-    CommentResponse commentResponse = new CommentResponse();
+    CommentResponse insertCommentResponse = new CommentResponse();
     @Autowired
     IPostRepository iPostRepository;
     @Autowired
@@ -37,30 +39,51 @@ public class PostDetailService implements IPostDetailService {
 	// 対象投稿取得
 	public PostDetailResponse getTargetPost(String postId) {
 		System.out.println("PostDetailService.getTargetPost()呼び出し");
+		List<Comments> commentList = new ArrayList<>();
+		List<String> userIdListByPostComment = new ArrayList<>();
+		List<String> userNameListByPostComment = new ArrayList<>();
+		List<Users> userInfoList = new ArrayList<>();
 		try {
 			Posts post = iPostRepository.getTargetPost(postId);
-			if (post != null && !post.getUserId().isEmpty()) {
-				String userName = iUserRepository.getUserName(post.getUserId());
-				postDetailResponse = addPostDetailResponse(chUtil.SUCCESS,0,null,post,userName);
-			} else {
-				postDetailResponse = addPostDetailResponse(chUtil.SUCCESS,0,null,null,null);
+			String userName = iUserRepository.getUserName(post.getUserId());
+			commentList = iCommentsRepository.getCommentList(postId);
+			// ユーザIDをユーザネーム検索用にセット
+			for (int i = 0; i < commentList.size(); i++) {
+				userIdListByPostComment.add(commentList.get(i).getUserId());
 			}
+			if (!userIdListByPostComment.isEmpty()) {
+				userInfoList = getUserInfoList(userIdListByPostComment);
+				for (int i = 0; i < userIdListByPostComment.size(); i++) {
+					String userId = userIdListByPostComment.get(i);
+					for (int j = 0; j < userInfoList.size(); j++) {
+						String dbUserId = userInfoList.get(j).getUserId();
+						if (userId.equals(dbUserId)) {
+							String userNameByPostComment = userInfoList.get(j).getUserName();
+							userNameListByPostComment.add(userNameByPostComment);
+							break;
+						}
+					}
+				}
+			} else {
+				userNameListByPostComment = Collections.emptyList();
+			}
+			postDetailResponse = addPostDetailResponse(chUtil.SUCCESS, 0, null, post, userName, commentList, userNameListByPostComment);
 		} catch(Exception e) {
 			System.out.println(e);
-			postDetailResponse = addPostDetailResponse(chUtil.FAILURE_1,0,chUtil.ERROR_DB,null,null);
+			postDetailResponse = addPostDetailResponse(chUtil.FAILURE_1, 0, chUtil.ERROR_DB, null, null, Collections.emptyList(),Collections.emptyList());
 		}
 		return postDetailResponse;
 	}
 	
 	// コメント登録
-	public CommentResponse postComment(@RequestParam String content,String postId, String userId) {
+	public CommentResponse postComment(@RequestParam String content, String postId, String userId) {
 		System.out.println("PostDetailService.postComment()呼び出し");
+		Comments postComment = new Comments();
 		try {
-			Comments postComment = new Comments();
 			String commentId = getUniquePostId();
 			if (commentId.equals(chUtil.NO_REMAINDER)) {
-				commentResponse = addCommentResponse(chUtil.FAILURE_2,0,chUtil.CAN_NOT_POST,postComment,Collections.emptyList());
-				return commentResponse;
+				insertCommentResponse = addInsertCommentResponse(chUtil.FAILURE_2, 0, chUtil.CAN_NOT_POST, postComment);
+				return insertCommentResponse;
 			}
 			Date CreatTime = new Date();
 			postComment.setContent(content);
@@ -69,11 +92,11 @@ public class PostDetailService implements IPostDetailService {
 			postComment.setCreatedAt(CreatTime);
 			postComment.setCommentId(commentId);
 			iCommentsRepository.createComment(postComment);
-			commentResponse = addCommentResponse(chUtil.SUCCESS,0,null,postComment,Collections.emptyList());
+			insertCommentResponse = addInsertCommentResponse(chUtil.SUCCESS, 0, null, postComment);
 		} catch(Exception e) {
 			System.out.println(e);
 		}
-		return commentResponse;
+		return insertCommentResponse;
 	}
 	
 	// postId取得処理(DBと重複しない値で最大7桁)
@@ -93,6 +116,12 @@ public class PostDetailService implements IPostDetailService {
         return chUtil.NO_REMAINDER;
     }
 	
+	private List<Users> getUserInfoList(List<String> userIdList){
+		List<Users> userInfoList = new ArrayList<Users>();
+		userInfoList = iUserRepository.getUserNameListToUserInfoNull(userIdList);
+		return userInfoList;
+	}
+	
 	/**
 	 * 投稿詳細処理結果追加
 	 * @param processResult 処理結果
@@ -102,13 +131,15 @@ public class PostDetailService implements IPostDetailService {
 	 * @param userName 投稿者名
 	 * @return postDetailResponse 投稿詳細レスポンス
 	 */
-	private PostDetailResponse addPostDetailResponse(int processResult,int httpStatusCd,String errMessage,Posts post,String userName) {
+	private PostDetailResponse addPostDetailResponse(int processResult, int httpStatusCd, String errMessage, Posts post, String userName, List<Comments> commentList, List<String> userNameListByPostComment) {
 		System.out.println("PostDetailService.addResponse()呼び出し");
 		postDetailResponse.setProcessResult(processResult);
 		postDetailResponse.setHttpStatusCd(httpStatusCd);
 		postDetailResponse.setErrMessage(errMessage);
 		postDetailResponse.setPost(post);
 		postDetailResponse.setUserName(userName);
+		postDetailResponse.setCommentList(commentList);
+		postDetailResponse.setUserNameListByPostComment(userNameListByPostComment);
 		return postDetailResponse;
 	}
 	
@@ -121,13 +152,12 @@ public class PostDetailService implements IPostDetailService {
 	 * @param commentList コメント一覧
 	 * @return postDetailResponse コメントレスポンス
 	 */
-	private CommentResponse addCommentResponse(int processResult, int httpStatusCd, String errMessage, Comments comment, List<Comments> commentList) {
+	private CommentResponse addInsertCommentResponse(int processResult, int httpStatusCd, String errMessage, Comments comment) {
 		System.out.println("PostDetailService.addResponse()呼び出し");
-		commentResponse.setProcessResult(processResult);
-		commentResponse.setHttpStatusCd(httpStatusCd);
-		commentResponse.setErrMessage(errMessage);
-		commentResponse.setComment(comment);
-		commentResponse.setCommentList(commentList);
-		return commentResponse;
+		insertCommentResponse.setProcessResult(processResult);
+		insertCommentResponse.setHttpStatusCd(httpStatusCd);
+		insertCommentResponse.setErrMessage(errMessage);
+		insertCommentResponse.setComment(comment);
+		return insertCommentResponse;
 	}
 }

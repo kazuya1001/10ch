@@ -48,7 +48,9 @@ function formatDate(dateString) {
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
     const seconds = String(date.getSeconds()).padStart(2, '0');
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    const daysOfWeek = ["日", "月", "火", "水", "木", "金", "土"];
+    const dayOfWeek = daysOfWeek[date.getDay()];
+    return `${year}/${month}/${day}(${dayOfWeek}) ${hours}:${minutes}:${seconds}`;
 }
 
 function getTargetPost() {
@@ -66,13 +68,31 @@ function getTargetPost() {
 			var postHTML = `
                 <div class="post">
                     <div class="post-header">
-                        <span class="post-user" onclick="redirectToUserDetail('${response.post.userId}')">投稿者：${response.userName}</span>
+                        <div>投稿者：<span  class="post-user" onclick="redirectToUserDetail('${response.post.userId}')">${response.userName}</span>  さん</div>
                         <span class="post-date">投稿日：${formattedDate}</span>
                     </div>
                     <h2 class="post-title">タイトル：${response.post.title}</h2>
                     <p class="post-content">内容：${response.post.content}</p>
                 </div>`;
 			$('#post-container').append(postHTML);
+			
+			// コメント件数取得
+			const commentCount = response.commentList.length;
+			$('#comment-count').text(commentCount);
+		    response.commentList.forEach(function(post, index) {
+				const formattedDate = formatDate(post.createdAt);
+                var commentsHTML = `
+                    <div class = "comments">
+                        <div class="comment-header">
+                            <div class="comment-header-top">Res.${index+1}  <span class="user-name-comment" onclick="redirectToUserDetail('${post.userId}')">${response.userNameListByPostComment[index]}</span> さん</div>
+                            <div class="comment-header-bottom">${formattedDate}</div>
+                        </div>
+                        <div class="content">
+                            <p class="comment-content">${post.content}</p>
+                        </div>
+                    </div>`;
+                $('#comments-container').append(commentsHTML);
+			});
 		},
 		error: function(error) {
 			console.error('エラー:', error);
@@ -129,6 +149,26 @@ $(document).ready(function() {
 			}
 		});
 	});
+});
+
+$(document).ready(function() {
+    // スクロールイベントを監視
+    $(window).on('scroll', function() {
+        // 線の位置を再取得（線の下端）
+        var linePosition = $('.comments-divider').offset().top + $('.comments-divider').height();
+
+        // 各コメントの位置を取得し、それぞれ個別にチェック
+        $('.comments').each(function() {
+            var commentPosition = $(this).offset().top;
+
+            // コメントが線の上に来たら非表示、線の下に来たら再表示
+            if (commentPosition < linePosition) {
+                $(this).css('visibility', 'hidden'); // このコメントを非表示
+            } else {
+                $(this).css('visibility', 'visible'); // このコメントを表示
+            }
+        });
+    });
 });
 
 

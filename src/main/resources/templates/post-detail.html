@@ -21,7 +21,10 @@
     </header>
     <div th:replace="common/popup.html"></div>
     <div id="post-container" class="post-container"></div>
-    <!-- コメント入力フォーム -->
+    <div class="comments-divider">
+        <span id="comments-title">コメント(<span id="comment-count">0</span>)</span>
+    </div>
+    <div id="comments-container" class="comments-container"></div>
     <form id="comment" class="comment-section">
         <h2>コメントを投稿</h2>
         <textarea id="content" maxlength="200" placeholder="200文字以内で入力してください..."></textarea>

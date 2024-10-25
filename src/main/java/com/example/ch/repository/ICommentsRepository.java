@@ -17,4 +17,11 @@ public interface ICommentsRepository {
      * @param postComment 投稿コメント
      */
 	void createComment(Comments postComment);
+	
+    /**
+     * コメント一覧取得(投稿詳細画面)
+     * @param postId ポストId
+     * @return コメント一覧
+     */
+    public List<Comments> getCommentList(String postId);
 }
