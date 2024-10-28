@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.ch.common.ChUtil;
+import com.example.ch.model.Users;
 import com.example.ch.response.HomeResponse;
 import com.example.ch.service.IHomeService;
 
@@ -25,9 +26,10 @@ public class HomeController {
 	@GetMapping("/home")
 	public String init(HttpSession session, Model model) {
 		System.out.println("HomeController.init()呼び出し");
-		Object userInfo = session.getAttribute("user");
+		Users userInfo = (Users) session.getAttribute("user");
 		if (userInfo != null) {
 			model.addAttribute("isSignedIn",true);
+			model.addAttribute("userId",userInfo.getUserId());
 		} else {
 			model.addAttribute("isSignedIn",false);
 			model.addAttribute("message",chUtil.IS_LOGGEDOUT);

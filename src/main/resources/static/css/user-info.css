@@ -1,4 +1,49 @@
 @charset "UTF-8";
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f0ff; 
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 60px;
+}
+
+.header-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    padding-right: 16px;
+}
+
+header button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    width: 10em;
+    height: 3em;
+}
+
+header button:hover {
+    background-color: #0056b3; 
+}
 
 .site-title {
     font-family: "Comic Sans MS", cursive, sans-serif;
@@ -6,33 +51,11 @@
     font-weight: bold;
     color: #007bff;
     text-decoration: none; 
-    display: inline-block;
-    padding-left: 20px;
-}
-
-.screen-title {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-}
-
-.header-right {
-    display: flex;
-    align-items: center;
 }
 
 .site-title:hover {
     color: #0056b3;
     cursor: pointer;
-}
-
-.error {
-    border: 1px solid red; 
 }
 
 .success {
@@ -84,70 +107,22 @@ table{
 .password-toggle {
     position: absolute;
     right: 20px;
-    top: 35%;
+    top: 32%;
     transform: translateY(-50%);
     cursor: pointer;
     font-size: 1.5em;
+    color: #666;
+    z-index: 5; 
 }
 
 input[type="password"] {
     width: calc(100% - 30px); 
-}
-
-.signInButton{
-	margin-right: 10px;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #e0f0ff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-}
-
-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 1;
-    height: 60px;
-}
-
-.logoContainer {
-    text-align: center;
-    margin-bottom: 70px;
+    padding-right: 35px; 
     position: relative;
-    top:50px;
+    z-index: 1;
 }
 
-.logo {
-    height: 225px;
-    width: 300px;
-    border-radius:50% ;
-    object-fit: cover;
-    margin: 0;
-    padding: 0;
-    clip-path: circle(40%);
-}
-
-.signUpText {
-    margin-top: 10px;
-    font-size: 50px;
-    color: #007bff;
-    transform: translate(0%,-100%);
-}
-input[type="text"], input[type="password"], input[type="email"] {
+input[type="text"], input[type="now-password"], input[type="new-password"],input[type="password"], input[type="email"] {
     border: 1px solid #ccc; 
     padding: 10px; 
     width: 100%;
@@ -169,31 +144,14 @@ form {
     border-radius: 8px;
     width: 100%;
     max-width: 700px;
-    margin-top: -140px;
+    margin: auto;
 }
 .labelContainer {
     display: flex;
     align-items: center;
 }
 
-header button {
-    padding: 10px 20px;
-    margin-left: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #007bff;
-    border: none;
-    border-radius: 50px;
-    color: white;
-    width: 10em;
-    height: 3em;
-}
-
-header button:hover {
-    background-color: #0056b3; 
-}
-
-.sign-up-button{
+.update-button{
 	width: 10em;
     padding: 10px;
     background-color: #007bff;

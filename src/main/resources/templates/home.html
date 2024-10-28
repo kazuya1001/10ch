@@ -22,6 +22,12 @@
             <button type="button" th:if="${!isSignedIn}" onclick="location.href='/sign-in'">SIGN-IN</button>
         </div>
 	</header>
+	<div class="settings-panel">
+		<div class="user-info" th:if="${isSignedIn}" onclick="location.href='/user-info'">
+			<img src="/img/user_icon.png" class="user-icon">
+			<span class="user-id" th:text="${userId}"></span>
+		</div>
+	</div>
 	<h1 id="home-post-title" class="home-post-title" th:utext="${message}"></h1>
 	<div id="posts-container" class="posts-container"></div>
 	<div id="error-message" class="alert alert-danger" style="display:none;"></div>
