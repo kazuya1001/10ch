@@ -68,16 +68,6 @@ $(document).ready(function(){
     $('#user-name, #user-id, #email, #now-password, #new-password, #con-password').on('input', function() {
         initialCheck();
     });
-
-    // パスワード表示/非表示切り替え
-    $('.password-toggle').on('click', function() {
-        const passwordField = $(this).prev('input[type="password"], input[type="text"]'); // パスワードフィールドを取得
-        const type = passwordField.attr('type') === 'password' ? 'text' : 'password';
-        passwordField.attr('type', type); // フィールドのタイプを切り替え
-
-        $(this).toggleClass('fa-eye fa-eye-slash'); // アイコンクラスの切り替えを維持
-    });
-
     
     // 新しいパスワードのチェック
     function checkNewPassword() {
@@ -97,4 +87,45 @@ $(document).ready(function(){
 
     // 初期チェック
     initialCheck();
+    
+    $('#update-button').on('click',function() {
+		if($(this).prop('disabled')){
+			return;
+		}
+		// 入力された値を変数に格納する
+		const data = {
+			userName:$('#user-name').val(),
+			userId:$('#user-id').val(),
+			nowPass:$('#now-password').val(),
+			newPass:$('#new-password').val(),
+			email:$('#email').val(),
+		};
+		$.ajax({
+		    // HTTP POST送信
+			url: '/api/updateAcount',
+			type: 'post',
+			dataType: 'json',
+			data: data,
+		    success: function(response) {
+				if (response.processResult === 1){
+					// エラーメッセージを表示
+					const errMsg = response.errMessage.replace("{0}",messageUserInfo.updateAcount);
+					$('#error-message').text(errMsg + messageList.info.I0001);
+					return;
+				}else if (response.processResult === 2) {
+                    // エラーメッセージを表示
+                    $('#error-message').text(response.errMessage).show();
+                    return;
+                }
+                alert('更新されました！');
+                location.reload();
+        	},
+        	error: function(xhr, status, error) {
+				console.log("Error:", error);
+				console.log("Status:", status);
+				console.log("Response:", xhr.responseText);
+				$('#error-message').text('エラー内容: ' + xhr.responseText).show();
+				}
+        });
+	});
 });

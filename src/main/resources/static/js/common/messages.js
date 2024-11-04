@@ -44,6 +44,11 @@ const messagePostDetail = {
 	postDetail:"投稿詳細",
 };
 
+// ユーザ情報画面で使用
+const messageUserInfo = {
+	updateAcount:"ユーザ情報更新",
+};
+
 // サインアウト状態時に使用
 const messageStatusSignOut = {
 	messageCommon:"を見たい場合はサインインしてください",

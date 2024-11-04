@@ -1,6 +1,8 @@
 package com.example.ch.service;
 
 import java.security.MessageDigest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HexFormat;
 
@@ -9,12 +11,12 @@ import org.springframework.stereotype.Service;
 
 import com.example.ch.common.ChUtil;
 import com.example.ch.model.Users;
-import com.example.ch.repository.IUserRepository;
+import com.example.ch.repository.IUsersRepository;
 import com.example.ch.response.SignUpResponse;
 @Service
 public class SignUpService implements ISignUpService {
 	@Autowired
-	private IUserRepository iUserRepository;
+	private IUsersRepository iUsersRepository;
 	@Autowired
 	SignUpResponse signUpResponse = new SignUpResponse();
 	@Autowired
@@ -31,8 +33,14 @@ public class SignUpService implements ISignUpService {
 			// 登録済みチェック
 			if (registeredCheck(userId,email)) {
 				System.out.println("登録済みチェックOK");
-				Date CreatTime = new Date();
-				addAcount.setUpdateAt(CreatTime);
+				Date creatTime = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+				try {
+					Date formattedDate = sdf.parse(sdf.format(creatTime)); 
+					addAcount.setUpdateAt(formattedDate);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 				// パスワードハッシュ化
 				MessageDigest sha256 = MessageDigest.getInstance("sha-256");
 				byte[] sha256Byte = sha256.digest(pass.getBytes());
@@ -40,7 +48,7 @@ public class SignUpService implements ISignUpService {
 				String hashPass = hex.formatHex(sha256Byte);
 				addAcount.setPasswordHash(hashPass);
 				// アカウント追加処理
-				iUserRepository.addAcount(addAcount);
+				iUsersRepository.addAcount(addAcount);
 				signUpResponse = addResponse(chUtil.SUCCESS,0,null);
 			} else {
 				System.out.println("登録済みチェックNG");
@@ -58,8 +66,8 @@ public class SignUpService implements ISignUpService {
 	public boolean registeredCheck(String userId,String email) {
 		System.out.println("SignUpResponse.registeredCheck()呼び出し");
 		boolean result = false;
-		int countUserId = iUserRepository.countUserIdRegistered(userId);
-		int countEmail = iUserRepository.countEmailRegistered(email);
+		int countUserId = iUsersRepository.countUserIdRegistered(userId);
+		int countEmail = iUsersRepository.countEmailRegistered(email);
 		if(countUserId == 0 && countEmail == 0) {
 			result =  true;
 		}

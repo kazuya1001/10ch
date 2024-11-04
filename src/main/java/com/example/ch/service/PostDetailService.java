@@ -1,5 +1,7 @@
 package com.example.ch.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -16,7 +18,7 @@ import com.example.ch.model.Posts;
 import com.example.ch.model.Users;
 import com.example.ch.repository.ICommentsRepository;
 import com.example.ch.repository.IPostRepository;
-import com.example.ch.repository.IUserRepository;
+import com.example.ch.repository.IUsersRepository;
 import com.example.ch.response.CommentResponse;
 import com.example.ch.response.PostDetailResponse;
 
@@ -30,7 +32,7 @@ public class PostDetailService implements IPostDetailService {
     @Autowired
     IPostRepository iPostRepository;
     @Autowired
-    IUserRepository iUserRepository;
+    IUsersRepository iUsersRepository;
     @Autowired
     ICommentsRepository iCommentsRepository;
 	@Autowired
@@ -45,7 +47,7 @@ public class PostDetailService implements IPostDetailService {
 		List<Users> userInfoList = new ArrayList<>();
 		try {
 			Posts post = iPostRepository.getTargetPost(postId);
-			String userName = iUserRepository.getUserName(post.getUserId());
+			String userName = iUsersRepository.getUserName(post.getUserId());
 			commentList = iCommentsRepository.getCommentList(postId);
 			// ユーザIDをユーザネーム検索用にセット
 			for (int i = 0; i < commentList.size(); i++) {
@@ -85,11 +87,17 @@ public class PostDetailService implements IPostDetailService {
 				insertCommentResponse = addInsertCommentResponse(chUtil.FAILURE_2, 0, chUtil.CAN_NOT_POST, postComment);
 				return insertCommentResponse;
 			}
-			Date CreatTime = new Date();
 			postComment.setContent(content);
 			postComment.setPostId(postId);
 			postComment.setUserId(userId);
-			postComment.setCreatedAt(CreatTime);
+			Date creatTime = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			try {
+				Date formattedDate = sdf.parse(sdf.format(creatTime)); 
+				postComment.setCreatedAt(formattedDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			postComment.setCommentId(commentId);
 			iCommentsRepository.createComment(postComment);
 			insertCommentResponse = addInsertCommentResponse(chUtil.SUCCESS, 0, null, postComment);
@@ -118,7 +126,7 @@ public class PostDetailService implements IPostDetailService {
 	
 	private List<Users> getUserInfoList(List<String> userIdList){
 		List<Users> userInfoList = new ArrayList<Users>();
-		userInfoList = iUserRepository.getUserNameListToUserInfoNull(userIdList);
+		userInfoList = iUsersRepository.getUserNameListToUserInfoNull(userIdList);
 		return userInfoList;
 	}
 	

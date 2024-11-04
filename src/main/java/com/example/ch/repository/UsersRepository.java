@@ -10,7 +10,7 @@ import com.example.ch.model.Users;
 import com.example.ch.model.UsersExample;
 
 @Repository
-public class UserRepository implements IUserRepository {
+public class UsersRepository implements IUsersRepository {
 	
 	@Autowired
 	private UsersMapper usersMapper;
@@ -62,7 +62,7 @@ public class UserRepository implements IUserRepository {
 	}
 	
 	// userIdをキーにuserName取得
-	@Override 
+	@Override
 	public String getUserName(String userId) {
 		UsersExample example = new UsersExample();
 		UsersExample.Criteria criteria = example.createCriteria();
@@ -70,4 +70,14 @@ public class UserRepository implements IUserRepository {
 		Users user = usersMapper.selectByExample(example);
 		return user.getUserName();
 	}
+	
+	// アカウント更新
+	@Override
+	public void updateAcount(Users updateAcount, String userId) {
+		UsersExample example = new UsersExample();
+		UsersExample.Criteria criteria = example.createCriteria();
+		criteria.andUserIdEqualTo(userId);
+		usersMapper.updateByExample(updateAcount, example);
+	}
+
 }

@@ -16,8 +16,6 @@ public class UserDetailController {
 
     @Autowired
     private IUserDetailService iUserDetailService;
-    @Autowired
-    UserDetailResponse userDetailResponse = new UserDetailResponse();
     
 	/**
 	 * ユーザ詳細画面表示
@@ -39,6 +37,7 @@ public class UserDetailController {
 	@ResponseBody
 	public UserDetailResponse getUserPosts(@RequestBody String userId, Model model) {
 		System.out.println("UserDetailController.getUserPosts()呼び出し");
+		UserDetailResponse userDetailResponse = new UserDetailResponse();
 		userDetailResponse = iUserDetailService.getUserPosts(userId);
 		return userDetailResponse;
 	}

@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.example.ch.model.Users;
 
-public interface IUserRepository {
+public interface IUsersRepository {
 
-	void addAcount (Users addAcount);
+	void addAcount(Users addAcount);
 	
 	int countUserIdRegistered(String userId);
 	
@@ -19,4 +19,7 @@ public interface IUserRepository {
 	List<Users> getUserNameListToUserInfoNull(List<String> userIdList);
 	
 	String getUserName(String userId);
+	
+	void updateAcount(Users updateAcount, String userId);
+
 }

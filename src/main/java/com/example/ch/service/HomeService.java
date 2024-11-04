@@ -11,7 +11,7 @@ import com.example.ch.common.ChUtil;
 import com.example.ch.model.Posts;
 import com.example.ch.model.Users;
 import com.example.ch.repository.IPostRepository;
-import com.example.ch.repository.IUserRepository;
+import com.example.ch.repository.IUsersRepository;
 import com.example.ch.response.HomeResponse;
 
 import jakarta.servlet.http.HttpSession;
@@ -23,7 +23,7 @@ public class HomeService implements IHomeService {
     @Autowired
     private IPostRepository iPostRepository;
     @Autowired
-    private IUserRepository iUserRepository;
+    private IUsersRepository iUsersRepository;
 	@Autowired
 	ChUtil chUtil;
 	
@@ -41,7 +41,7 @@ public class HomeService implements IHomeService {
 				postList = iPostRepository.getHomePostList();
 			}
 			userIdList = postList.stream().map(Posts::getUserId).collect(Collectors.toList());
-			userNameList = iUserRepository.getUserNameListToUserInfoNull(userIdList);
+			userNameList = iUsersRepository.getUserNameListToUserInfoNull(userIdList);
 	        List<String> userNameRecord = new ArrayList<String>();
 	        // usersテーブルとpostsテーブルのuserIdを比較しuserNameをホーム画面の投稿順に並べる
 			for (int i = 0; i < postList.size();i++) {

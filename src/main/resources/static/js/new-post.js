@@ -78,7 +78,7 @@ $(document).ready(function() {
 					return;
 				} 
 				alert('投稿されました！');
-                location.reload(); // ページをリロードしてコメントを表示
+                location.reload();
 			},
 			error: function(error) {
 				console.error('Error:', error);

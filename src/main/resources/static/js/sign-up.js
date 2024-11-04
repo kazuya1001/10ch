@@ -103,7 +103,7 @@ $(document).ready(function(){
 		if($(this).prop('disabled')){
 			return;
 		}
-	// sign-upで入力された値を変数に格納する
+		// 入力された値を変数に格納する
 		const data = {
 			userName:$('#user-name').val(),
 			userId:$('#user-id').val(),

@@ -138,13 +138,14 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focu
 }
 
 form {
-    background-color: transparent;
-    padding: 40px;
+    background-color: #ffffff;
+    padding: 30px;
     box-shadow: none;
     border-radius: 8px;
     width: 100%;
     max-width: 700px;
     margin: auto;
+    margin-top: 20px;
 }
 .labelContainer {
     display: flex;
@@ -164,6 +165,17 @@ form {
     margin:auto;
     display: block;
 }
+
+.formTitle{
+	background-color: #007bff;
+	width: 225px;
+	color: #ffffff;
+	font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
 
 button:disabled, button.disabled {
     background-color: #cccccc;

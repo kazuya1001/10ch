@@ -10,12 +10,16 @@ public class ChUtil {
 	public final int FAILURE_1 = 1;
 	public final int FAILURE_2 = 2;
 	
+	/* ユーザ更新画面 */
+	public final int NG_COUNT = 1;
+	
 	/* エラーメッセージ */
 	public final String ERROR = "{0}に失敗しました。";
 	public final String ERROR_DB = "データベース処理エラーにより{0}に失敗しました。";
 	public final String ERROR_REGISTERED = "ユーザID又はemailは既に使用されています。";
 	public final String ERROR_NOT_EXISTS = "入力されたユーザID又はemailは存在しません。";
 	public final String ERROR_PASS_WRONG = "入力されたパスワードは間違っています。";
+	public final String ERROR_NOW_PASS_WRONG = "現在のパスワードが間違っています。";
 	
 	/* NewPostServiceで使用 */
 	public final String NO_REMAINDER = "余りがありません";

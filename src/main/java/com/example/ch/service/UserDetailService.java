@@ -9,7 +9,7 @@ import com.example.ch.common.ChUtil;
 import com.example.ch.model.Posts;
 import com.example.ch.model.Users;
 import com.example.ch.repository.IPostRepository;
-import com.example.ch.repository.IUserRepository;
+import com.example.ch.repository.IUsersRepository;
 import com.example.ch.response.UserDetailResponse;
 
 @Service
@@ -20,7 +20,7 @@ public class UserDetailService implements IUserDetailService {
     @Autowired
     IPostRepository iPostRepository;
     @Autowired
-    IUserRepository iUserRepository;
+    IUsersRepository iUsersRepository;
 	@Autowired
 	ChUtil chUtil;
     
@@ -29,7 +29,7 @@ public class UserDetailService implements IUserDetailService {
 		Users dbUser = new Users();
 		try {
 			List<Posts> postRecord = iPostRepository.getPostListByUserId(userId);
-			dbUser = iUserRepository.findByUserId(userId);
+			dbUser = iUsersRepository.findByUserId(userId);
 			if (dbUser == null) {
 				throw new RuntimeException("対象のユーザが見つかりませんでした");
 			}
@@ -44,7 +44,7 @@ public class UserDetailService implements IUserDetailService {
 	
 	// 処理結果追加
 	private UserDetailResponse addResponse(int processResult,int httpStatusCd,String errMessage,List<Posts> postRecord,String userName) {
-		System.out.println("UserDetailResponse.addResponse()呼び出し");
+		System.out.println("UserDetailService.addResponse()呼び出し");
 		userDetailResponse.setProcessResult(processResult);
 		userDetailResponse.setHttpStatusCd(httpStatusCd);
 		userDetailResponse.setErrMessage(errMessage);

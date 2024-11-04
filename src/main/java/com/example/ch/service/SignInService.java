@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.example.ch.common.ChUtil;
 import com.example.ch.model.Users;
-import com.example.ch.repository.IUserRepository;
+import com.example.ch.repository.IUsersRepository;
 import com.example.ch.response.SignInResponse;
 
 @Service
 public class SignInService implements ISignInService {
 	@Autowired
-	private IUserRepository iUserRepository;
+	private IUsersRepository iUsersRepository;
 	@Autowired
 	SignInResponse signInResponse = new SignInResponse();
 	@Autowired
@@ -35,17 +35,16 @@ public class SignInService implements ISignInService {
 				// 入力された情報を元にユーザ情報を取得
 				if (!(userId.isEmpty())) {
 					System.out.println("ユーザIDで登録確認");
-					dbUser = iUserRepository.findByUserId(userId);
+					dbUser = iUsersRepository.findByUserId(userId);
 				} else if(!(email.isEmpty())) {
 					System.out.println("emailで登録確認");
-					dbUser = iUserRepository.findByEmail(email);
+					dbUser = iUsersRepository.findByEmail(email);
 				}
 				// パスワードハッシュ化
 				MessageDigest sha256 = MessageDigest.getInstance("sha-256");
 				byte[] sha256Byte = sha256.digest(pass.getBytes());
 				HexFormat hex = HexFormat.of().withLowerCase();
 				String hashPass = hex.formatHex(sha256Byte);
-				
 				String dbPass = dbUser.getPasswordHash();
 				
 				// パスワードチェック
@@ -71,8 +70,8 @@ public class SignInService implements ISignInService {
 	private boolean existingCheck(String userId,String email){
 		System.out.println("SignUpResponse.existingCheck()呼び出し");
 		boolean result = true;
-		int countUserId = iUserRepository.countUserIdRegistered(userId);
-		int countEmail = iUserRepository.countEmailRegistered(email);
+		int countUserId = iUsersRepository.countUserIdRegistered(userId);
+		int countEmail = iUsersRepository.countEmailRegistered(email);
 		if (countUserId == 0 && countEmail == 0) {
 			result =  false;
 		}

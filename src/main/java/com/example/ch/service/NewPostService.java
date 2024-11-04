@@ -1,5 +1,7 @@
 package com.example.ch.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -32,11 +34,17 @@ public class NewPostService implements INewPostService {
 				newPostResponse = addResponse(chUtil.FAILURE_2,0,chUtil.CAN_NOT_POST);
 				return newPostResponse;
 			}
-			Date CreatTime = new Date();
 			newPost.setTitle(title);
 			newPost.setContent(content);
 			newPost.setUserId(userId);
-			newPost.setUpdateAt(CreatTime);
+			Date creatTime = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			try {
+				Date formattedDate = sdf.parse(sdf.format(creatTime)); 
+				newPost.setUpdateAt(formattedDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			newPost.setPostId(postId);
 			iPostRepository.createPost(newPost);
 			newPostResponse = addResponse(chUtil.SUCCESS,0,null);
