@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.ch.model.Users;
 import com.example.ch.response.UserInfoResponse;
@@ -30,6 +31,7 @@ public class UserInfoController {
 	}
 	
 	@PostMapping("/api/updateAcount")
+	@ResponseBody 
 	public UserInfoResponse updateAcount(@RequestParam String userName, String userId, String nowPass, String newPass, String email, HttpSession session) {
 		UserInfoResponse userInfoResponse = new UserInfoResponse();
 		Users updateUser = new Users();
@@ -38,6 +40,8 @@ public class UserInfoController {
 		updateUser.setPasswordHash(userName);
 		updateUser.setEmail(email);
 		userInfoResponse = iUserInfoService.updateAcount(updateUser, nowPass, session);
+		// セッション情報を更新
+        session.setAttribute("user", userInfoResponse.getUserInfo());
 		return userInfoResponse;
 	}
 }

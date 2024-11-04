@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.ch.common.ChUtil;
 import com.example.ch.model.Posts;
-import com.example.ch.repository.IPostRepository;
+import com.example.ch.repository.IPostsRepository;
 import com.example.ch.response.NewPostResponse;
 @Service
 public class NewPostService implements INewPostService {
@@ -19,7 +19,7 @@ public class NewPostService implements INewPostService {
 	@Autowired
 	NewPostResponse newPostResponse = new NewPostResponse();
     @Autowired
-    private IPostRepository iPostRepository;
+    private IPostsRepository iPostRepository;
 	@Autowired
 	ChUtil chUtil;
 	

@@ -3,8 +3,9 @@ package com.example.ch.repository;
 import java.util.List;
 
 import com.example.ch.model.Posts;
+import com.example.ch.model.Users;
 
-public interface IPostRepository {
+public interface IPostsRepository {
 	
     /**
      * 新規投稿(新規投稿画面)
@@ -43,4 +44,11 @@ public interface IPostRepository {
      * @return 投稿内容
      */
 	Posts getTargetPost(String postId);
+	
+    /**
+     * ユーザID更新(ユーザ情報画面)
+     * @param updateAcount 更新アカウント
+     * @param userId ユーザID
+     */
+	void updateByUserId(Users updateAcount, String userId);
 }

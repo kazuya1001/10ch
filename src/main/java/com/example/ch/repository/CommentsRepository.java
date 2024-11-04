@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.example.ch.mapper.CommentsMapper;
 import com.example.ch.model.Comments;
 import com.example.ch.model.CommentsExample;
+import com.example.ch.model.Users;
 @Repository
 public class CommentsRepository implements ICommentsRepository {
 	
@@ -31,5 +32,11 @@ public class CommentsRepository implements ICommentsRepository {
 		criteria.andPostIdEqualTo(postId);
 		example.setOrderByClause("created_at DESC");
 		return commentsMapper.selectByExample(example);
+	}
+	
+	// アカウント更新
+	@Override
+	public void updateByUserId(Users updateAcount, String userId) {
+		commentsMapper.updateByUserId(updateAcount.getUserId(), userId);
 	}
 }

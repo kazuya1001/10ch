@@ -1,7 +1,9 @@
 package com.example.ch.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.example.ch.common.ChUtil;
 import com.example.ch.model.Posts;
 import com.example.ch.model.Users;
-import com.example.ch.repository.IPostRepository;
+import com.example.ch.repository.IPostsRepository;
 import com.example.ch.repository.IUsersRepository;
 import com.example.ch.response.HomeResponse;
 
@@ -21,7 +23,7 @@ public class HomeService implements IHomeService {
 	@Autowired
 	HomeResponse homeResponse = new HomeResponse();
     @Autowired
-    private IPostRepository iPostRepository;
+    private IPostsRepository iPostRepository;
     @Autowired
     private IUsersRepository iUsersRepository;
 	@Autowired
@@ -41,6 +43,9 @@ public class HomeService implements IHomeService {
 				postList = iPostRepository.getHomePostList();
 			}
 			userIdList = postList.stream().map(Posts::getUserId).collect(Collectors.toList());
+	        Set<String> set = new HashSet<>(userIdList);
+	        // SetからListに戻す
+	        userIdList = new ArrayList<>(set);
 			userNameList = iUsersRepository.getUserNameListToUserInfoNull(userIdList);
 	        List<String> userNameRecord = new ArrayList<String>();
 	        // usersテーブルとpostsテーブルのuserIdを比較しuserNameをホーム画面の投稿順に並べる

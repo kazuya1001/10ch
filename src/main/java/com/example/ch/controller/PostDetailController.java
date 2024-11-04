@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.ch.model.Users;
 import com.example.ch.response.CommentResponse;
 import com.example.ch.response.PostDetailResponse;
 import com.example.ch.service.IPostDetailService;
+
+import jakarta.servlet.http.HttpSession;
 @Controller
 public class PostDetailController {
 
@@ -27,8 +30,15 @@ public class PostDetailController {
 	 * @return htmlファイル "post-detail"
 	 */
 	@GetMapping("/posts/post-detail")
-	public String init() {
+	public String init(HttpSession session, Model model) {
 		System.out.println("PostDetailController.init()呼び出し");
+		Users userInfo = (Users) session.getAttribute("user");
+		if (userInfo != null) {
+			model.addAttribute("isSignedIn",true);
+			model.addAttribute("userId",userInfo.getUserId());
+		} else {
+			model.addAttribute("isSignedIn",false);
+		}
 		return "post-detail";
 	}
 	

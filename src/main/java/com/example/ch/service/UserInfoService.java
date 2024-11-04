@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.ch.common.ChUtil;
 import com.example.ch.model.Users;
+import com.example.ch.repository.ICommentsRepository;
+import com.example.ch.repository.IPostsRepository;
 import com.example.ch.repository.IUsersRepository;
 import com.example.ch.response.UserInfoResponse;
 
@@ -24,6 +26,10 @@ public class UserInfoService implements IUserInfoService {
 	@Autowired
 	private IUsersRepository iUsersRepository;
 	@Autowired
+	private IPostsRepository iPostsRepository;
+	@Autowired
+	private ICommentsRepository iCommentsRepository;
+	@Autowired
 	ChUtil chUtil;
 	@Autowired
 	ISignUpService iSignUpService;
@@ -35,13 +41,13 @@ public class UserInfoService implements IUserInfoService {
 		String email = updateAcount.getEmail();
 		Users sessionUser = (Users) session.getAttribute("user");
 		String sessionPass = sessionUser.getPasswordHash();
+		Users userInfo = new Users();
 		try {
 			//新しいパスワードをハッシュ化
 			MessageDigest sha256 = MessageDigest.getInstance("sha-256");
 			byte[] sha256Byte = sha256.digest(newPass.getBytes());
 			HexFormat hex = HexFormat.of().withLowerCase();
 			String hashPass = hex.formatHex(sha256Byte);
-			updateAcount.setPasswordHash(hashPass);
 			// 現在のパスワードチェック
 			// 取得した現在のパスワードをハッシュ化
 			sha256Byte = sha256.digest(nowPass.getBytes());
@@ -49,6 +55,7 @@ public class UserInfoService implements IUserInfoService {
 			hashPass = hex.formatHex(sha256Byte);
 			if (hashPass.equals(sessionPass)) {
 				System.out.println("パスワードチェックOK");
+				updateAcount.setPasswordHash(hashPass);
 				// 登録済みチェック
 				if (registeredCheck(userId, email, sessionUser)) {
 					System.out.println("登録済みチェックOK");
@@ -62,17 +69,21 @@ public class UserInfoService implements IUserInfoService {
 						e.printStackTrace();
 					}
 					iUsersRepository.updateAcount(updateAcount, sessionUser.getUserId());
-					userInfoResponse = addResponse(chUtil.SUCCESS, 0, null);
+					userInfo = iUsersRepository.findByUserId(userId);
+					iPostsRepository.updateByUserId(updateAcount, sessionUser.getUserId());
+					iCommentsRepository.updateByUserId(updateAcount, sessionUser.getUserId());
+					// 更新が成功した場合、更新したユーザ情報取得
+					userInfoResponse = addResponse(chUtil.SUCCESS, 0, null, userInfo);
 				} else {
 					System.out.println("登録済みチェックNG");
-					userInfoResponse = addResponse(chUtil.FAILURE_2, 0, chUtil.ERROR_REGISTERED);
+					userInfoResponse = addResponse(chUtil.FAILURE_2, 0, chUtil.ERROR_REGISTERED, null);
 				}
 			} else {
 				System.out.println("パスワードチェックNG");
-				userInfoResponse = addResponse(chUtil.FAILURE_2, 0, chUtil.ERROR_NOW_PASS_WRONG);
+				userInfoResponse = addResponse(chUtil.FAILURE_2, 0, chUtil.ERROR_NOW_PASS_WRONG, null);
 			}
 		} catch (Exception e) {
-			userInfoResponse = addResponse(chUtil.FAILURE_1, 0, chUtil.ERROR_DB);
+			userInfoResponse = addResponse(chUtil.FAILURE_1, 0, chUtil.ERROR_DB, null);
 		}
 		return userInfoResponse;
 	}
@@ -90,11 +101,12 @@ public class UserInfoService implements IUserInfoService {
 	}
 
 	// 処理結果追加
-	private UserInfoResponse addResponse(int processResult, int httpStatusCd, String errMessage) {
+	private UserInfoResponse addResponse(int processResult, int httpStatusCd, String errMessage, Users userInfo) {
 		System.out.println("UserInfoService.addResponse()呼び出し");
 		userInfoResponse.setProcessResult(processResult);
 		userInfoResponse.setHttpStatusCd(httpStatusCd);
 		userInfoResponse.setErrMessage(errMessage);
+		userInfoResponse.setUserInfo(userInfo);
 		return userInfoResponse;
 	}
 }

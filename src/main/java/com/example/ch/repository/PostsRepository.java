@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.example.ch.mapper.PostsMapper;
 import com.example.ch.model.Posts;
 import com.example.ch.model.PostsExample;
+import com.example.ch.model.Users;
 @Repository
-public class PostRepository implements IPostRepository {
+public class PostsRepository implements IPostsRepository {
 	
 	@Autowired
 	private PostsMapper postsMapper;
@@ -48,5 +49,11 @@ public class PostRepository implements IPostRepository {
 		PostsExample.Criteria criteria = example.createCriteria();
 		criteria.andPostIdEqualTo(postId);
 		return postsMapper.selectByPrimaryKey(postId);
+	}
+	
+	// アカウント更新
+	@Override
+	public void updateByUserId(Users updateAcount, String userId) {
+		postsMapper.updateByUserId(updateAcount.getUserId(), userId);
 	}
 }

@@ -17,7 +17,7 @@ import com.example.ch.model.Comments;
 import com.example.ch.model.Posts;
 import com.example.ch.model.Users;
 import com.example.ch.repository.ICommentsRepository;
-import com.example.ch.repository.IPostRepository;
+import com.example.ch.repository.IPostsRepository;
 import com.example.ch.repository.IUsersRepository;
 import com.example.ch.response.CommentResponse;
 import com.example.ch.response.PostDetailResponse;
@@ -30,7 +30,7 @@ public class PostDetailService implements IPostDetailService {
     @Autowired
     CommentResponse insertCommentResponse = new CommentResponse();
     @Autowired
-    IPostRepository iPostRepository;
+    IPostsRepository iPostRepository;
     @Autowired
     IUsersRepository iUsersRepository;
     @Autowired

@@ -121,6 +121,7 @@ $(document).ready(function(){
                 location.reload();
         	},
         	error: function(xhr, status, error) {
+				location.reload();
 				console.log("Error:", error);
 				console.log("Status:", status);
 				console.log("Response:", xhr.responseText);

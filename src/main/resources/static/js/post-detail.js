@@ -68,11 +68,16 @@ function getTargetPost() {
 			var postHTML = `
                 <div class="post">
                     <div class="post-header">
-                        <div>投稿者：<span  class="post-user" onclick="redirectToUserDetail('${response.post.userId}')">${response.userName}</span>  さん</div>
-                        <span class="post-date">投稿日：${formattedDate}</span>
+                        <div class="post-title">${response.post.title}</div>
                     </div>
-                    <h2 class="post-title">タイトル：${response.post.title}</h2>
-                    <p class="post-content">内容：${response.post.content}</p>
+                    <div class="post-center">
+                        <div>投稿者：<span  class="post-user" onclick="redirectToUserDetail('${response.post.userId}')">${response.userName}</span>  さん</div>
+                        <div>投稿日時：<span class="post-date">${formattedDate}</span></div>
+                    </div>
+                    <div class="divider-line"></div>
+                   <div class="post-bottom"> 
+                        <p class="post-content">${response.post.content}</p>
+                   </div>
                 </div>`;
 			$('#post-container').append(postHTML);
 			

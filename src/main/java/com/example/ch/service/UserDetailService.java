@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.ch.common.ChUtil;
 import com.example.ch.model.Posts;
 import com.example.ch.model.Users;
-import com.example.ch.repository.IPostRepository;
+import com.example.ch.repository.IPostsRepository;
 import com.example.ch.repository.IUsersRepository;
 import com.example.ch.response.UserDetailResponse;
 
@@ -18,7 +18,7 @@ public class UserDetailService implements IUserDetailService {
     @Autowired
     UserDetailResponse userDetailResponse = new UserDetailResponse();
     @Autowired
-    IPostRepository iPostRepository;
+    IPostsRepository iPostRepository;
     @Autowired
     IUsersRepository iUsersRepository;
 	@Autowired
